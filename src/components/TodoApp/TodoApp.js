@@ -8,15 +8,13 @@ class TodoApp extends Component {
 
   actions = {
     createTask: (title) => {
-      console.log("created", title);
       return { id: this.newId++, title, checked: false };
     },
 
     deleteTask: (id) => {
-      console.log("deleted", id);
       this.setState(({ tasks }) => {
         let index = tasks.findIndex((el) => el.id === id);
-        console.log(index);
+
         let before = tasks.slice(0, index);
         let after = tasks.slice(index + 1);
         let newArr = [...before, ...after];
@@ -64,8 +62,7 @@ class TodoApp extends Component {
         let after = tempArr.slice(Index + 1);
         let newTask = { ...tempArr[Index], title };
         let newArr = [...before, newTask, ...after];
-        console.log("changingTitle id: ", id);
-        console.log("changingTitle newArr: ", newArr);
+
         return { tasks: newArr };
       });
     },
