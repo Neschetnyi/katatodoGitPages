@@ -84,8 +84,42 @@ class TodoApp extends Component {
     viewMode: "all",
   };
 
+  // Сохраняем данные в localStorage перед закрытием страницы
+  saveToLocalStorage = () => {
+    const { tasks, unComplitedTasks, viewMode } = this.state;
+    localStorage.setItem(
+      "todoAppState",
+      JSON.stringify({ tasks, unComplitedTasks, viewMode })
+    );
+  };
+
+  // Восстанавливаем состояние из localStorage при монтировании
+  loadFromLocalStorage = () => {
+    const savedState = localStorage.getItem("todoAppState");
+    if (savedState) {
+      const { tasks, unComplitedTasks, viewMode } = JSON.parse(savedState);
+      this.setState({ tasks, unComplitedTasks, viewMode });
+      this.newId = tasks.length ? tasks[tasks.length - 1].id + 1 : 0; // Восстанавливаем новый ID
+    }
+  };
+
   componentDidMount() {
+    // Восстанавливаем состояние из localStorage при монтировании компонента
+    this.loadFromLocalStorage();
+
+    // Слушаем событие переключения вкладок
+    window.addEventListener("storage", this.loadFromLocalStorage);
+
+    // Считаем количество невыполненных задач
     this.actions.viewUnComplitedTasksCount();
+  }
+
+  componentWillUnmount() {
+    // Сохраняем состояние в localStorage перед закрытием вкладки/страницы
+    this.saveToLocalStorage();
+
+    // Убираем слушателя события переключения вкладок
+    window.removeEventListener("storage", this.loadFromLocalStorage);
   }
 
   render() {
