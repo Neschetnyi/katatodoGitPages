@@ -105,17 +105,16 @@ class TodoApp extends Component {
   componentDidMount() {
     // Восстанавливаем состояние из localStorage при монтировании компонента
     this.actions.loadFromLocalStorage();
-    console.log("after load storage");
+    console.log("after load storage:", this.state);
     console.log(`${this.state.onClose}`);
 
     // Считаем количество невыполненных задач
     this.actions.viewUnComplitedTasksCount();
 
     window.addEventListener("beforeunload", (event) => {
-      this.setState(
-        { onClose: "It Works!" },
-        this.actions.saveToLocalStorage()
-      );
+      this.setState(({ onClose }) => {
+        return { onClose: "It Works!" };
+      }, this.actions.saveToLocalStorage());
     });
   }
 
