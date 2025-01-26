@@ -25,29 +25,26 @@ class TasksFilter extends Component {
   };
 
   onClickSetActive = (e) => {
-    console.log("onClickSetActive", e.target.id);
     let tempArr = this.state.buttons.map((button) => {
       button.active = false;
       return button;
     });
-    console.log("tempArr onClickSetActive", tempArr);
+
     tempArr[e.target.id].active = true;
     this.setState({ buttons: tempArr });
   };
 
   onClickSetClassName = (e) => {
-    console.log("onClickSetClassName", e.target.id);
     let tempArr = this.state.buttons.map((button) => {
       button.className = "";
       return button;
     });
-    console.log("tempArr onClickSetClassName", tempArr);
+
     tempArr[e.target.id].className = "selected";
     this.setState({ buttons: tempArr });
   };
 
   onClick = (e) => {
-    console.log("onClick", e.target.id);
     this.onClickSetActive(e);
     this.onClickSetClassName(e);
     this.props.actions.changingViewMode(this.state.buttons[e.target.id].name);
