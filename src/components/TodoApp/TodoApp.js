@@ -18,7 +18,7 @@ class TodoApp extends Component {
         let before = tasks.slice(0, index);
         let after = tasks.slice(index + 1);
         let newArr = [...before, ...after];
-        alert("delete");
+
         return {
           tasks: newArr,
         };
@@ -99,18 +99,23 @@ class TodoApp extends Component {
     tasks: [],
     unComplitedTasks: 0,
     viewMode: "all",
+    onClose: "no reaction",
   };
 
   componentDidMount() {
     // Восстанавливаем состояние из localStorage при монтировании компонента
     this.actions.loadFromLocalStorage();
     console.log("after load storage");
+    console.log(`${this.state.onClose}`);
 
     // Считаем количество невыполненных задач
     this.actions.viewUnComplitedTasksCount();
 
     window.addEventListener("beforeunload", (event) => {
-      alert("end");
+      this.setState(
+        { onClose: "It Works!" },
+        this.actions.saveToLocalStorage()
+      );
     });
   }
 
