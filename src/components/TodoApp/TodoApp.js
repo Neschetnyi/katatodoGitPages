@@ -18,7 +18,7 @@ class TodoApp extends Component {
         let before = tasks.slice(0, index);
         let after = tasks.slice(index + 1);
         let newArr = [...before, ...after];
-
+        alert("delete");
         return {
           tasks: newArr,
         };
