@@ -18,7 +18,7 @@ const TaskList = ({ data, actions }) => {
             viewUnComplitedTasksCount={() =>
               actions.viewUnComplitedTasksCount(id)
             }
-            saveToLocalStorage={actions.saveToLocalStorage()}
+            saveToLocalStorage={() => actions.saveToLocalStorage()}
             changingTitle={actions.changingTitle}
           />
         );
