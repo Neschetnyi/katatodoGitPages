@@ -19,7 +19,7 @@ class NewTaskForm extends Component {
       value: "",
     });
     this.props.actions.viewUnComplitedTasksCount();
-    this.actions.saveToLocalStorage();
+    this.props.actions.saveToLocalStorage();
   };
 
   render() {
