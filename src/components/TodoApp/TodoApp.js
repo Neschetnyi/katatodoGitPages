@@ -79,6 +79,7 @@ class TodoApp extends Component {
 
     // Сохраняем данные в localStorage перед закрытием страницы
     saveToLocalStorage: () => {
+      console.log("save to storage");
       const { tasks, unComplitedTasks, viewMode } = this.state;
       localStorage.setItem(
         "todoAppState",
