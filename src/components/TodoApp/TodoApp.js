@@ -105,20 +105,13 @@ class TodoApp extends Component {
     // Восстанавливаем состояние из localStorage при монтировании компонента
     this.actions.loadFromLocalStorage();
     console.log("after load storage");
-    // Слушаем событие переключения вкладок
-    window.addEventListener("storage", this.actions.loadFromLocalStorage);
 
     // Считаем количество невыполненных задач
     this.actions.viewUnComplitedTasksCount();
-  }
 
-  componentWillUnmount() {
-    // Сохраняем состояние в localStorage перед закрытием вкладки/страницы
-    this.actions.saveToLocalStorage();
-    console.log("after load storage");
-    // Убираем слушателя события переключения вкладок
-    window.removeEventListener("storage", this.actions.loadFromLocalStorage);
-    console.log("after saving storage");
+    window.addEventListener("beforeunload", (event) => {
+      alert("end");
+    });
   }
 
   render() {
