@@ -93,6 +93,17 @@ class TodoApp extends Component {
         this.newId = tasks.length ? tasks[tasks.length - 1].id + 1 : 0; // Восстанавливаем новый ID
       }
     },
+
+    handleBeforeUnload: (event) => {
+      // Устанавливаем текст предупреждения
+      console.log("handleBeforeUnload");
+      const message =
+        "Вы закрываете список. Все несохраненные данные будут потеряны.";
+
+      // Для старых браузеров или специфических случаев необходимо вернуть message
+      event.returnValue = message; // Это для старых браузеров
+      return message; // Для современных браузеров (например, Chrome)
+    },
   };
 
   state = {
@@ -111,11 +122,7 @@ class TodoApp extends Component {
     // Считаем количество невыполненных задач
     this.actions.viewUnComplitedTasksCount();
 
-    window.addEventListener("beforeunload", (event) => {
-      this.setState(({ onClose }) => {
-        return { onClose: "It Works!" };
-      }, this.actions.saveToLocalStorage());
-    });
+    window.addEventListener("beforeunload", this.actions.handleBeforeUnload);
   }
 
   render() {
