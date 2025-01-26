@@ -106,7 +106,7 @@ class TodoApp extends Component {
   componentDidMount() {
     // Восстанавливаем состояние из localStorage при монтировании компонента
     this.loadFromLocalStorage();
-
+    console.log("after load storage");
     // Слушаем событие переключения вкладок
     window.addEventListener("storage", this.loadFromLocalStorage);
 
