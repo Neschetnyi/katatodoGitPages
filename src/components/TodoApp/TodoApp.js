@@ -76,6 +76,25 @@ class TodoApp extends Component {
         return { unComplitedTasks: unComplitedTasks.length };
       });
     },
+
+    // Сохраняем данные в localStorage перед закрытием страницы
+    saveToLocalStorage: () => {
+      const { tasks, unComplitedTasks, viewMode } = this.state;
+      localStorage.setItem(
+        "todoAppState",
+        JSON.stringify({ tasks, unComplitedTasks, viewMode })
+      );
+    },
+
+    // Восстанавливаем состояние из localStorage при монтировании
+    loadFromLocalStorage: () => {
+      const savedState = localStorage.getItem("todoAppState");
+      if (savedState) {
+        const { tasks, unComplitedTasks, viewMode } = JSON.parse(savedState);
+        this.setState({ tasks, unComplitedTasks, viewMode });
+        this.newId = tasks.length ? tasks[tasks.length - 1].id + 1 : 0; // Восстанавливаем новый ID
+      }
+    },
   };
 
   state = {
@@ -84,31 +103,12 @@ class TodoApp extends Component {
     viewMode: "all",
   };
 
-  // Сохраняем данные в localStorage перед закрытием страницы
-  saveToLocalStorage = () => {
-    const { tasks, unComplitedTasks, viewMode } = this.state;
-    localStorage.setItem(
-      "todoAppState",
-      JSON.stringify({ tasks, unComplitedTasks, viewMode })
-    );
-  };
-
-  // Восстанавливаем состояние из localStorage при монтировании
-  loadFromLocalStorage = () => {
-    const savedState = localStorage.getItem("todoAppState");
-    if (savedState) {
-      const { tasks, unComplitedTasks, viewMode } = JSON.parse(savedState);
-      this.setState({ tasks, unComplitedTasks, viewMode });
-      this.newId = tasks.length ? tasks[tasks.length - 1].id + 1 : 0; // Восстанавливаем новый ID
-    }
-  };
-
   componentDidMount() {
     // Восстанавливаем состояние из localStorage при монтировании компонента
-    this.loadFromLocalStorage();
+    this.actions.loadFromLocalStorage();
     console.log("after load storage");
     // Слушаем событие переключения вкладок
-    window.addEventListener("storage", this.loadFromLocalStorage);
+    window.addEventListener("storage", this.actions.loadFromLocalStorage);
 
     // Считаем количество невыполненных задач
     this.actions.viewUnComplitedTasksCount();
@@ -116,10 +116,10 @@ class TodoApp extends Component {
 
   componentWillUnmount() {
     // Сохраняем состояние в localStorage перед закрытием вкладки/страницы
-    this.saveToLocalStorage();
+    this.actions.saveToLocalStorage();
     console.log("after load storage");
     // Убираем слушателя события переключения вкладок
-    window.removeEventListener("storage", this.loadFromLocalStorage);
+    window.removeEventListener("storage", this.actions.loadFromLocalStorage);
     console.log("after saving storage");
   }
 
