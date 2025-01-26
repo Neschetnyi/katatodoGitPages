@@ -3,8 +3,6 @@ import Task from "./Task/Task";
 import PropTypes from "prop-types";
 
 const TaskList = ({ data, actions }) => {
-  console.log("TaskList data:", data);
-
   let tasksNewArr = [];
   let renderingTasks = (taskList) => {
     for (let i = 0; i < taskList.length; i++) {
@@ -39,7 +37,7 @@ const TaskList = ({ data, actions }) => {
 
   tasksNewArr = switchArraysOnViewMode();
   renderingTasks(tasksNewArr);
-  console.log("TaskList tasksNewArr", tasksNewArr);
+
   return <ul className="todo-list">{tasksNewArr}</ul>;
 };
 

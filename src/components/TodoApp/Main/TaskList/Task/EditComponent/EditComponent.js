@@ -11,7 +11,6 @@ class EditComponent extends Component {
   };
 
   onSubmit = (e) => {
-    console.log("submit");
     e.preventDefault();
     this.props.changingTitle(this.props.id, this.state.title);
     this.props.togleEdit();
@@ -26,8 +25,6 @@ class EditComponent extends Component {
   }
 
   render() {
-    console.log("editComponent props:", this.props);
-    console.log("editComponent id:", this.props.id);
     return (
       <form onSubmit={this.onSubmit}>
         <input

@@ -19,12 +19,10 @@ class Task extends Component {
   };
 
   togleEdit = () => {
-    console.log("togleEdit");
     this.setState({ edit: !this.state.edit });
   };
 
   render() {
-    console.log("single task !!!!!!!", this.props);
     let editComponent = null;
     if (this.state.edit) {
       editComponent = (
@@ -40,9 +38,6 @@ class Task extends Component {
 
     let { checked } = this.props;
     let classNames = "";
-
-    console.log("single task", this.props);
-    console.log("single task checked", checked);
 
     if (checked) {
       classNames += "completed ";

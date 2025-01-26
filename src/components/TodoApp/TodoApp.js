@@ -117,13 +117,13 @@ class TodoApp extends Component {
   componentWillUnmount() {
     // Сохраняем состояние в localStorage перед закрытием вкладки/страницы
     this.saveToLocalStorage();
-
+    console.log("after load storage");
     // Убираем слушателя события переключения вкладок
     window.removeEventListener("storage", this.loadFromLocalStorage);
+    console.log("after saving storage");
   }
 
   render() {
-    console.log("TodoApp", this.state);
     return (
       <section className="todoapp">
         <Header actions={this.actions} />
@@ -145,5 +145,4 @@ TodoApp.propTypes = {
   viewMode: PropTypes.string,
 };
 
-console.log(React.createElement);
 export default TodoApp;
