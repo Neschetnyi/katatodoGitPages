@@ -5,7 +5,6 @@ class Footer extends Component {
   onClear = () => {
     this.props.actions.clearComplitedTasks();
     this.props.actions.viewUnComplitedTasksCount();
-    this.props.actions.saveToLocalStorage();
   };
 
   render() {

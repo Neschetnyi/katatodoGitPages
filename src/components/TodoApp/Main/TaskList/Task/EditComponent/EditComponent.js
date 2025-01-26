@@ -14,7 +14,6 @@ class EditComponent extends Component {
     e.preventDefault();
     this.props.changingTitle(this.props.id, this.state.title);
     this.props.togleEdit();
-    this.props.saveToLocalStorage();
   };
 
   componentDidMount() {

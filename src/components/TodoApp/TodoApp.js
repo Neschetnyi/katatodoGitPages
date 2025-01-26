@@ -22,13 +22,13 @@ class TodoApp extends Component {
         return {
           tasks: newArr,
         };
-      });
+      }, this.actions.saveToLocalStorage);
     },
 
     addTask: (title) => {
       this.setState(({ tasks }) => {
         return { tasks: [...tasks, this.actions.createTask(title)] };
-      });
+      }, this.actions.saveToLocalStorage);
     },
 
     togleCecked: (id) => {
@@ -40,14 +40,14 @@ class TodoApp extends Component {
         let newTask = { ...tempArr[Index], checked: !tempArr[Index].checked };
         let newArr = [...before, newTask, ...after];
         return { tasks: newArr };
-      });
+      }, this.actions.saveToLocalStorage);
     },
 
     clearComplitedTasks: () => {
       this.setState(({ tasks }) => {
         let newArr = tasks.filter((el) => el.checked === false);
         return { tasks: newArr };
-      });
+      }, this.actions.saveToLocalStorage);
     },
 
     changingViewMode: (viewMode) => {
@@ -64,7 +64,7 @@ class TodoApp extends Component {
         let newArr = [...before, newTask, ...after];
 
         return { tasks: newArr };
-      });
+      }, this.actions.saveToLocalStorage);
     },
 
     viewUnComplitedTasksCount: () => {

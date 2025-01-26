@@ -16,7 +16,6 @@ class Task extends Component {
   onDelete = (e) => {
     this.props.deleteTask(e.target.id);
     this.props.viewUnComplitedTasksCount();
-    this.props.saveToLocalStorage();
   };
 
   togleEdit = () => {
