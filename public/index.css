@@ -224,7 +224,7 @@ body {
 }
 
 .todo-list li label .description {
-  word-break: break-all;
+  word-break:keep-all;
   display: block;
   line-height: 1.2;
   transition: color 0.4s;

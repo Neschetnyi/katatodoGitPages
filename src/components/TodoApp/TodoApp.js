@@ -97,8 +97,7 @@ class TodoApp extends Component {
     handleBeforeUnload: (event) => {
       // Устанавливаем текст предупреждения
       console.log("handleBeforeUnload");
-      const message =
-        "Вы закрываете список. Все несохраненные данные будут потеряны.";
+      const message = "Вы закрываете список";
 
       // Для старых браузеров или специфических случаев необходимо вернуть message
       event.returnValue = message; // Это для старых браузеров
