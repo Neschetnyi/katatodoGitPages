@@ -223,6 +223,7 @@ body {
 }
 
 .todo-list li label .created {
+  width: 20%;
   font-size: 13px;
   color: gray;
 }
@@ -231,7 +232,7 @@ body {
   word-break:keep-all;
   display: block;
   line-height: 1.2;
-  width: 55%;
+  width: 65%;
   transition: color 0.4s;
   font-weight: 400;
   color: #4d4d4d;
