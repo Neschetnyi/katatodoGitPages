@@ -157,6 +157,7 @@ body {
   font-size: 18px;
   word-break: keep-all;
   white-space:wrap;
+  text-wrap: wrap;
   border-bottom: 1px solid #ededed;
 }
 
