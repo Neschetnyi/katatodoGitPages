@@ -66,9 +66,9 @@ class Task extends Component {
           <label>
             <div>
               <span className="description">{this.props.title} </span>
+              <TimeOnWork />
             </div>
             <div>
-              <TimeOnWork />
               <span className="created">
                 <Timer creationDate={this.props.creationDate} />
               </span>
