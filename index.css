@@ -249,10 +249,10 @@ body {
 }
 
 .descriptionDiv {
-  width: 70%;
+  width: 300px;
 }
 .TimeOnWorkDiv {
-  width: 20%;
+  width: 100px;
 }
 .todo-list li .view {
   position: relative;
