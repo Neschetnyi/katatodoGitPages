@@ -229,6 +229,15 @@ body {
 
 .todo-list li label {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 85px 15px 60px;
+}
+
+.todo-list li label p {
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding: 15px 85px 15px 60px;
