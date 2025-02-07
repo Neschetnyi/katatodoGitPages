@@ -68,7 +68,7 @@ class Task extends Component {
               <span className="description">{this.props.title} </span>
               <TimeOnWork />
             </div>
-            <p>
+            <div>
               <span className="created">
                 <Timer creationDate={this.props.creationDate} />
               </span>
@@ -80,7 +80,7 @@ class Task extends Component {
                 className="icon icon-destroy"
                 onClick={this.onDelete}
               ></button>
-            </p>
+            </div>
           </label>
         </div>
         {editComponent}
