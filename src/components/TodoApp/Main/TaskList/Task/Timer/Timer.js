@@ -4,8 +4,9 @@ import PropTypes from "prop-types";
 
 class Timer extends Component {
   state = {
-    time: Date.now(),
-    timeToNow: formatDistanceToNow(Date.now(), { includeSeconds: true }),
+    timeToNow: formatDistanceToNow(this.props.creationDate, {
+      includeSeconds: true,
+    }),
   };
 
   componentDidMount() {
