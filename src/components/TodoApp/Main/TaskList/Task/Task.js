@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import EditComponent from "./EditComponent/EditComponent";
 import Timer from "./Timer/Timer";
 import PropTypes from "prop-types";
+import TimeOnWork from "./TimeOnWork/TimeOnWork";
 
 class Task extends Component {
   state = {
@@ -64,6 +65,7 @@ class Task extends Component {
           />
           <label>
             <span className="description">{this.props.title}</span>
+            <TimeOnWork />
             <span className="created">
               <Timer creationDate={this.props.creationDate} />
             </span>
