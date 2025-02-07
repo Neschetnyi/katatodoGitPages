@@ -11,7 +11,7 @@ class Timer extends Component {
   componentDidMount() {
     this.timer = setInterval(() => {
       this.setState({
-        timeToNow: formatDistanceToNow(this.state.time, {
+        timeToNow: formatDistanceToNow(this.props.creationDate, {
           includeSeconds: true,
         }),
       });
