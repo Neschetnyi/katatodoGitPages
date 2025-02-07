@@ -64,17 +64,24 @@ class Task extends Component {
             onChange={this.onChange}
           />
           <label>
-            <span className="description">{this.props.title}</span>
-            <TimeOnWork />
-            <span className="created">
-              <Timer creationDate={this.props.creationDate} />
-            </span>
+            <div>
+              <span className="description">{this.props.title} </span>
+            </div>
+            <div>
+              <TimeOnWork />
+              <span className="created">
+                <Timer creationDate={this.props.creationDate} />
+              </span>
+              <button
+                className="icon icon-edit"
+                onClick={this.togleEdit}
+              ></button>
+              <button
+                className="icon icon-destroy"
+                onClick={this.onDelete}
+              ></button>
+            </div>
           </label>
-          <button className="icon icon-edit" onClick={this.togleEdit}></button>
-          <button
-            className="icon icon-destroy"
-            onClick={this.onDelete}
-          ></button>
         </div>
         {editComponent}
       </li>
