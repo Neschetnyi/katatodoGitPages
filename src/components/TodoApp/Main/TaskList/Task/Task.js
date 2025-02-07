@@ -57,14 +57,14 @@ class Task extends Component {
     return (
       <li className={classNames}>
         <div className="view">
-          <input
-            className="toggle"
-            checked={checked}
-            type="checkbox"
-            onChange={this.onChange}
-          />
           <label>
             <div>
+              <input
+                className="toggle"
+                checked={checked}
+                type="checkbox"
+                onChange={this.onChange}
+              />
               <div className="descriptionDiv">
                 <span className="description">{this.props.title} </span>
               </div>
