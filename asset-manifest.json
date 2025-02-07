@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/katatodoGitPages/static/js/main.e3066d7f.js",
+    "main.js": "/katatodoGitPages/static/js/main.9f7b579f.js",
     "index.html": "/katatodoGitPages/index.html",
-    "main.e3066d7f.js.map": "/katatodoGitPages/static/js/main.e3066d7f.js.map"
+    "main.9f7b579f.js.map": "/katatodoGitPages/static/js/main.9f7b579f.js.map"
   },
   "entrypoints": [
-    "static/js/main.e3066d7f.js"
+    "static/js/main.9f7b579f.js"
   ]
 }
