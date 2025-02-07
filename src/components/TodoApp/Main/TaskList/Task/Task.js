@@ -23,6 +23,8 @@ class Task extends Component {
   };
 
   render() {
+    console.log(this.props.creationDate);
+
     let editComponent = null;
     if (this.state.edit) {
       editComponent = (
@@ -60,7 +62,7 @@ class Task extends Component {
           <label>
             <span className="description">{this.props.title}</span>
             <span className="created">
-              <Timer />
+              <Timer creationDate={this.props.creationDate} />
             </span>
           </label>
           <button className="icon icon-edit" onClick={this.togleEdit}></button>

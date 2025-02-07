@@ -8,7 +8,12 @@ class TodoApp extends Component {
 
   actions = {
     createTask: (title) => {
-      return { id: this.newId++, title, checked: false };
+      return {
+        id: this.newId++,
+        title,
+        checked: false,
+        creationDate: Date.now(),
+      };
     },
 
     deleteTask: (id) => {
@@ -74,7 +79,7 @@ class TodoApp extends Component {
       });
     },
 
-    // Сохраняем данные в localStorage перед закрытием страницы
+    // Сохраняем данные в localStorage
     saveToLocalStorage: () => {
       console.log("save to storage");
       const { tasks, unComplitedTasks, viewMode } = this.state;
@@ -84,7 +89,7 @@ class TodoApp extends Component {
       );
     },
 
-    // Восстанавливаем состояние из localStorage при монтировании
+    // Восстанавливаем состояние из localStorage
     loadFromLocalStorage: () => {
       const savedState = localStorage.getItem("todoAppState");
       if (savedState) {
