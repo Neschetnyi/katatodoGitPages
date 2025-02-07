@@ -23,7 +23,10 @@ class Task extends Component {
   };
 
   render() {
-    console.log(this.props.creationDate);
+    console.log(
+      `creation date of ${this.props.title}:`,
+      this.props.creationDate
+    );
 
     let editComponent = null;
     if (this.state.edit) {
