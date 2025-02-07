@@ -65,10 +65,10 @@ class Task extends Component {
           />
           <label>
             <div>
-              <div>
+              <div className="descriptionDiv">
                 <span className="description">{this.props.title} </span>
               </div>
-              <div>
+              <div className="TimeOnWorkDiv">
                 <TimeOnWork />
               </div>
             </div>

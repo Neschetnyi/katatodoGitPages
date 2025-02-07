@@ -243,6 +243,12 @@ body {
   justify-content: space-between;
 }
 
+.descriptionDiv {
+  width: 70%;
+}
+.TimeOnWorkDiv {
+  width: 20%;
+}
 .todo-list li .view {
   position: relative;
 }
