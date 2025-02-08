@@ -10,9 +10,22 @@ class NewTaskForm extends Component {
   };
 
   onChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value, // Позволяет обновлять любое поле
-    });
+    if (
+      e.target.value !== "" &&
+      /^[+]?\d+$/.test(e.target.value) &&
+      (e.target.name === "min" || e.target.name === "sec")
+    ) {
+      // Введенное значение является числом
+      this.setState({
+        [e.target.name]: e.target.value, // Позволяет обновлять любое поле
+      });
+    } else if (e.target.name === "title") {
+      this.setState({
+        [e.target.name]: e.target.value,
+      });
+    } else {
+      alert("Введите число");
+    }
   };
 
   onSubmit = (e) => {
