@@ -17,11 +17,11 @@ class NewTaskForm extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.actions.addTask(
-      this.state.title,
-      this.state.min,
-      this.state.sec
-    );
+    this.props.actions.addTask({
+      title: this.state.title,
+      min: this.state.min,
+      sec: this.state.sec,
+    });
     console.log("input value is:", this.state.title);
     this.setState({
       title: "",
