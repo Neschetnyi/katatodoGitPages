@@ -15,6 +15,7 @@ class NewTaskForm extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     this.props.actions.addTask(this.state.value);
+    console.log("input value is:", this.state.value);
     this.setState({
       value: "",
     });
