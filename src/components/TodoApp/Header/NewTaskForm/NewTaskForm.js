@@ -33,18 +33,25 @@ class NewTaskForm extends Component {
     if (this.state.title === "") {
       alert("Введите задачу");
     }
-    if (this.state.min === "") {
+    if (this.state.min === "" && this.state.sec !== "") {
       console.log('if min = ""');
       this.props.actions.addTask({
         title: this.state.title,
         min: 0,
         sec: this.state.sec,
       });
-    } else if (this.state.sec === "") {
+    } else if (this.state.sec === "" && this.state.min !== "") {
       console.log('if sec = ""');
       this.props.actions.addTask({
         title: this.state.title,
         min: this.state.min,
+        sec: 0,
+      });
+    } else if (this.state.sec === "" && this.state.min === "") {
+      console.log('if sec = ""');
+      this.props.actions.addTask({
+        title: this.state.title,
+        min: 0,
         sec: 0,
       });
     } else {
