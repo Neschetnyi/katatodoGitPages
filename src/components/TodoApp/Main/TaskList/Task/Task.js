@@ -45,9 +45,10 @@ class Task extends Component {
 
     let { checked } = this.props;
     let classNames = "";
+    let classNamesDescription = "description";
 
     if (checked) {
-      classNames += "completed ";
+      classNamesDescription += " completed ";
     }
 
     if (this.state.edit) {
@@ -64,7 +65,7 @@ class Task extends Component {
             onChange={this.onChange}
           />
           <label>
-            <span className="description">{this.props.title} </span>
+            <span className={classNamesDescription}>{this.props.title} </span>
             <TimeOnWork />
             <span className="created">
               <Timer creationDate={this.props.creationDate} />
