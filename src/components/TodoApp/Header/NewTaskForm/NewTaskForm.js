@@ -24,7 +24,7 @@ class NewTaskForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit} className="new-todo-form">
+      <form onSubmit={this.onSubmit}>
         <input
           className="new-todo"
           placeholder="Что сделать?"
