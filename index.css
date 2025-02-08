@@ -257,6 +257,12 @@ body {
   text-decoration: line-through;
 }
 
+.todo-list li label .created {
+  width: 20%;
+  font-size: 13px;
+  color: gray;
+}
+
 .todo-list li .icon {
   width: 30px;
   height: 40px;
