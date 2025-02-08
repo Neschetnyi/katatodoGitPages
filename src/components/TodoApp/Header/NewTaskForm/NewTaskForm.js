@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import "./NewTaskForm.css";
 
 class NewTaskForm extends Component {
   state = {
@@ -24,7 +25,7 @@ class NewTaskForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={this.onSubmit} className="new-todo-form">
         <input
           className="new-todo"
           placeholder="Что сделать?"
