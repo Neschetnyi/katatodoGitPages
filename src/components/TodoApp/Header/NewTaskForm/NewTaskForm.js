@@ -39,18 +39,4 @@ class NewTaskForm extends Component {
   }
 }
 
-NewTaskForm.defaultProps = {
-  actions: {
-    addTask: () => {},
-    viewUnComplitedTasksCount: () => {},
-  },
-};
-
-NewTaskForm.propTypes = {
-  actions: PropTypes.shape({
-    addTask: PropTypes.func.isRequired,
-    viewUnComplitedTasksCount: PropTypes.func.isRequired,
-  }).isRequired,
-};
-
 export default NewTaskForm;

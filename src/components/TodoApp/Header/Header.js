@@ -11,12 +11,4 @@ const Header = ({ actions }) => {
   );
 };
 
-Header.defaultProps = {
-  actions: {},
-};
-
-Header.propTypes = {
-  actions: PropTypes.object.isRequired,
-};
-
 export default Header;

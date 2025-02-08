@@ -55,17 +55,4 @@ TaskList.defaultProps = {
   },
 };
 
-TaskList.propTypes = {
-  data: PropTypes.shape({
-    tasks: PropTypes.array,
-    viewMode: PropTypes.string,
-  }),
-  actions: PropTypes.shape({
-    deleteTask: PropTypes.func,
-    togleCecked: PropTypes.func,
-    viewUnComplitedTasksCount: PropTypes.func,
-    changingTitle: PropTypes.func,
-  }),
-};
-
 export default TaskList;

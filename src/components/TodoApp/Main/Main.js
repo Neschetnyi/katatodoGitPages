@@ -21,22 +21,4 @@ Main.defaultProps = {
   },
 };
 
-Main.propTypes = {
-  actions: PropTypes.shape({
-    createTask: PropTypes.func,
-    deleteTask: PropTypes.func,
-    addTask: PropTypes.func,
-    togleCecked: PropTypes.func,
-    clearComplitedTasks: PropTypes.func,
-    changingViewMode: PropTypes.func,
-    changingTitle: PropTypes.func,
-    viewUnComplitedTasksCount: PropTypes.func,
-  }),
-  data: PropTypes.shape({
-    tasks: PropTypes.array,
-    unComplitedTasks: PropTypes.number,
-    viewMode: PropTypes.string,
-  }),
-};
-
 export default Main;
