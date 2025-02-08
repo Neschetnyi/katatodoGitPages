@@ -13,7 +13,10 @@ class NewTaskForm extends Component {
     if (
       e.target.value !== "" &&
       /^[+]?\d+$/.test(e.target.value) &&
-      (e.target.name === "min" || e.target.name === "sec")
+      (e.target.name === "day" ||
+        e.target.name === "hour" ||
+        e.target.name === "min" ||
+        e.target.name === "sec")
     ) {
       // Введенное значение является числом
       this.setState({
