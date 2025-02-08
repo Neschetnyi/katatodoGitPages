@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 
 class TimeOnWork extends Component {
+  state = {
+    day: this.props.day,
+    hour: this.props.hour,
+    min: this.props.min,
+    sec: this.props.sec,
+  };
+
   render() {
     return (
       <div class="description">
