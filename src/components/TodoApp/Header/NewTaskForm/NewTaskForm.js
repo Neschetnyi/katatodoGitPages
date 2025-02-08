@@ -30,20 +30,24 @@ class NewTaskForm extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    console.log("state in NewTaskForm", this.state);
+    if (this.state.title !== "") {
+      console.log("state in NewTaskForm", this.state);
 
-    this.props.actions.addTask({
-      title: this.state.title,
-      min: this.state.min,
-      sec: this.state.sec,
-    });
-    console.log("input value is:", this.state.title);
-    this.setState({
-      title: "",
-      min: "",
-      sec: "", // Обнуляем и другие поля
-    });
-    this.props.actions.viewUnComplitedTasksCount();
+      this.props.actions.addTask({
+        title: this.state.title,
+        min: this.state.min,
+        sec: this.state.sec,
+      });
+      console.log("input value is:", this.state.title);
+      this.setState({
+        title: "",
+        min: "",
+        sec: "", // Обнуляем и другие поля
+      });
+      this.props.actions.viewUnComplitedTasksCount();
+    } else {
+      alert("Введите задачу");
+    }
   };
 
   handleKeyPress = (e) => {
