@@ -67,10 +67,13 @@ class Task extends Component {
           />
           <label>
             <div className={classNamesDescription}>{this.props.title} </div>
-            <TimeOnWork />
-            <div className="created">
-              <Timer creationDate={this.props.creationDate} />
+            <div className="timersContainer">
+              <TimeOnWork />
+              <div className="created">
+                <Timer creationDate={this.props.creationDate} />
+              </div>
             </div>
+
             <button
               className="icon icon-edit"
               onClick={this.togleEdit}

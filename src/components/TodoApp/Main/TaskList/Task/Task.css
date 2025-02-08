@@ -88,6 +88,13 @@ label {
   text-decoration: line-through;
 }
 
+.timersContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .created {
   width: 20%;
   font-size: 13px;
