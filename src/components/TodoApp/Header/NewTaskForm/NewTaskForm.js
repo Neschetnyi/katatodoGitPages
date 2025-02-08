@@ -34,6 +34,8 @@ class NewTaskForm extends Component {
       alert("Введите задачу");
     }
     if (this.state.min === "" || this.state.sec === "") {
+      console.log('if min & sec = ""', this.state.min, this.state.sec);
+
       this.setState({
         min: "0",
         sec: "0",
