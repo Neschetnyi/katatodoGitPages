@@ -11,7 +11,7 @@ class NewTaskForm extends Component {
 
   onChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value, // Позволяет обновлять любое поле
+      [e.target.name]: e.target.value, // Позволяет обновлять любое поле ?
     });
   };
 
