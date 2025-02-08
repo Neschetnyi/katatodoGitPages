@@ -27,7 +27,6 @@ class NewTaskForm extends Component {
 
   render() {
     console.log("actions in NewTaskForm", this.props.actions);
-    console.log("state value in NewTaskForm", this.state.title);
 
     return (
       <form onSubmit={this.onSubmit} className="new-todo-form">
@@ -38,6 +37,8 @@ class NewTaskForm extends Component {
           value={this.state.title}
           onChange={this.onChange}
         />
+        <input class="new-todo-form__timer" placeholder="Min" />
+        <input class="new-todo-form__timer" placeholder="Sec" />
       </form>
     );
   }
