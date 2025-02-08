@@ -32,8 +32,7 @@ class NewTaskForm extends Component {
     e.preventDefault();
     if (this.state.title === "") {
       alert("Введите задачу");
-    }
-    if (this.state.min === "" && this.state.sec !== "") {
+    } else if (this.state.min === "" && this.state.sec !== "") {
       console.log('if min = ""');
       this.props.actions.addTask({
         title: this.state.title,
@@ -48,14 +47,14 @@ class NewTaskForm extends Component {
         sec: 0,
       });
     } else if (this.state.sec === "" && this.state.min === "") {
-      console.log('if sec = ""');
+      console.log('if sec = "" & min = ""');
       this.props.actions.addTask({
         title: this.state.title,
         min: 0,
         sec: 0,
       });
     } else {
-      console.log('if min & sec !== ""');
+      console.log("if min & sec exists");
       this.props.actions.addTask({
         title: this.state.title,
         min: this.state.min,
