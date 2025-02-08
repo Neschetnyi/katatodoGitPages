@@ -28,7 +28,7 @@ class NewTaskForm extends Component {
       <form onSubmit={this.onSubmit} className="new-todo-form">
         <input
           className="new-todo"
-          placeholder="Что сделать???"
+          placeholder="Что сделать?"
           autoFocus
           value={this.state.value}
           onChange={this.onChange}
