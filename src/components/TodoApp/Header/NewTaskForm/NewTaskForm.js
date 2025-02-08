@@ -20,7 +20,7 @@ class NewTaskForm extends Component {
     this.props.actions.addTask(this.state.title);
     console.log("input value is:", this.state.title);
     this.setState({
-      value: "",
+      title: "",
     });
     this.props.actions.viewUnComplitedTasksCount();
   };
