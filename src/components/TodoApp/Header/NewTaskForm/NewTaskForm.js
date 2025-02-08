@@ -34,10 +34,18 @@ class NewTaskForm extends Component {
       console.log("state in NewTaskForm", this.state);
       if (this.state.min === "" && this.state.sec === "") {
         this.setState(
-          {
-            min: "0",
-            sec: "0", // Обнуляем и другие поля
+          () => {
+            console.log(
+              "state in NewTaskForm min & sec",
+              this.state.min,
+              this.state.sec
+            );
+            return {
+              min: "0",
+              sec: "0", // Обнуляем и другие поля
+            };
           },
+
           () => {
             console.log(
               "state in NewTaskForm min & sec",
