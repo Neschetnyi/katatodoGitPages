@@ -47,10 +47,10 @@ class NewTaskForm extends Component {
       };
 
       if (tempOutput.sec === "") {
-        tempOutput.min = 0;
+        tempOutput.sec = 0;
       }
       if (tempOutput.min === "") {
-        tempOutput.sec = 0;
+        tempOutput.min = 0;
       }
       if (tempOutput.hour === "") {
         tempOutput.hour = 0;
