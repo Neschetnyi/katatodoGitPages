@@ -17,6 +17,8 @@ class NewTaskForm extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+    console.log("state in NewTaskForm", this.state);
+
     this.props.actions.addTask({
       title: this.state.title,
       min: this.state.min,
