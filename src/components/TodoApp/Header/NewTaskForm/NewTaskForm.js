@@ -34,19 +34,20 @@ class NewTaskForm extends Component {
       alert("Введите задачу");
     }
     if (this.state.min === "" || this.state.sec === "") {
-      console.log('if min & sec = ""', this.state.min, this.state.sec);
-
-      this.setState({
-        min: "0",
-        sec: "0",
+      console.log('if min & sec = ""');
+      this.props.actions.addTask({
+        title: this.state.title,
+        min: 0,
+        sec: 0,
+      });
+    } else {
+      console.log('if min & sec !== ""');
+      this.props.actions.addTask({
+        title: this.state.title,
+        min: this.state.min,
+        sec: this.state.sec,
       });
     }
-
-    this.props.actions.addTask({
-      title: this.state.title,
-      min: this.state.min,
-      sec: this.state.sec,
-    });
 
     console.log("input value is:", this.state.title);
     this.setState({
