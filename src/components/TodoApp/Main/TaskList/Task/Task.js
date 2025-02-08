@@ -55,6 +55,7 @@ class Task extends Component {
     if (this.state.edit) {
       classNames += "editing ";
     }
+
     console.log("render single task", this.props);
 
     return (
