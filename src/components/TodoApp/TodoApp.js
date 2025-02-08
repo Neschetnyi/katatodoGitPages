@@ -11,10 +11,10 @@ class TodoApp extends Component {
       return {
         id: this.newId++,
         title,
-        checked: false,
-        creationDate: Date.now(),
         min,
         sec,
+        checked: false,
+        creationDate: Date.now(),
       };
     },
 
