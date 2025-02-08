@@ -27,8 +27,16 @@ class NewTaskForm extends Component {
     console.log("input value is:", this.state.title);
     this.setState({
       title: "",
+      min: "",
+      sec: "", // Обнуляем и другие поля
     });
     this.props.actions.viewUnComplitedTasksCount();
+  };
+
+  handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      this.onSubmit(e);
+    }
   };
 
   render() {
@@ -43,6 +51,7 @@ class NewTaskForm extends Component {
           autoFocus
           value={this.state.title}
           onChange={this.onChange}
+          onKeyDown={this.handleKeyPress} // Обработка нажатия клавиши
         />
         <input
           className="new-todo-form__timer"
@@ -50,6 +59,7 @@ class NewTaskForm extends Component {
           placeholder="Min"
           value={this.state.min}
           onChange={this.onChange}
+          onKeyDown={this.handleKeyPress} // Обработка нажатия клавиши
         />
         <input
           className="new-todo-form__timer"
@@ -57,6 +67,7 @@ class NewTaskForm extends Component {
           placeholder="Sec"
           value={this.state.sec}
           onChange={this.onChange}
+          onKeyDown={this.handleKeyPress} // Обработка нажатия клавиши
         />
       </form>
     );
