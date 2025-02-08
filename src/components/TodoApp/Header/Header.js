@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const Header = ({ actions }) => {
   return (
     <header className="header">
-      <h1>Список</h1>
+      <h1>Список Дел</h1>
       <NewTaskForm actions={actions} />
     </header>
   );
