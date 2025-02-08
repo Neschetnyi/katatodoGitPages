@@ -31,6 +31,7 @@ class Task extends Component {
         <EditComponent
           id={this.props.id}
           togleEdit={this.togleEdit}
+          title={this.props.title}
           changingTitle={this.props.changingTitle}
           saveToLocalStorage={this.props.saveToLocalStorage}
         />

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 class EditComponent extends Component {
   state = {
-    title: "",
+    title: this.props.title,
   };
 
   onChange = (e) => {
