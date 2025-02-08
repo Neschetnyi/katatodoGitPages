@@ -6,7 +6,7 @@ class TimeOnWork extends Component {
       <div class="description">
         <button class="icon icon-play"></button>
         <button class="icon icon-pause"></button>
-        12:25
+        {this.props.min}:{this.props.sec}
       </div>
     );
   }
