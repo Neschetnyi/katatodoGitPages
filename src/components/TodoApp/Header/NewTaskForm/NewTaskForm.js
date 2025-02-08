@@ -34,6 +34,7 @@ class NewTaskForm extends Component {
   };
 
   handleKeyPress = (e) => {
+    console.log("key pressed", e.key);
     if (e.key === "Enter") {
       this.onSubmit(e);
     }
