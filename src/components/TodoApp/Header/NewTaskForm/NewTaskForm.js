@@ -30,53 +30,29 @@ class NewTaskForm extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    if (this.state.title !== "") {
-      console.log("state in NewTaskForm", this.state);
-      if (this.state.min === "" && this.state.sec === "") {
-        this.setState(
-          () => {
-            console.log(
-              "state in NewTaskForm min & sec before",
-              this.state.min,
-              this.state.sec
-            );
-            return {
-              min: "0",
-              sec: "0", // Обнуляем и другие поля
-            };
-          },
-
-          () => {
-            console.log(
-              "state in NewTaskForm min & sec",
-              this.state.min,
-              this.state.sec
-            );
-            this.props.actions.addTask({
-              title: this.state.title,
-              min: this.state.min,
-              sec: this.state.sec,
-            });
-          }
-        );
-      } else {
-        this.props.actions.addTask({
-          title: this.state.title,
-          min: this.state.min,
-          sec: this.state.sec,
-        });
-      }
-
-      console.log("input value is:", this.state.title);
-      this.setState({
-        title: "",
-        min: "",
-        sec: "", // Обнуляем и другие поля
-      });
-      this.props.actions.viewUnComplitedTasksCount();
-    } else {
+    if (this.state.title === "") {
       alert("Введите задачу");
     }
+    if (this.state.min === "" || this.state.sec === "") {
+      this.setState({
+        min: "0",
+        sec: "0",
+      });
+    }
+
+    this.props.actions.addTask({
+      title: this.state.title,
+      min: this.state.min,
+      sec: this.state.sec,
+    });
+
+    console.log("input value is:", this.state.title);
+    this.setState({
+      title: "",
+      min: "",
+      sec: "", // Обнуляем и другие поля
+    });
+    this.props.actions.viewUnComplitedTasksCount();
   };
 
   handleKeyPress = (e) => {
