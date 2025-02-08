@@ -3,6 +3,7 @@ import EditComponent from "./EditComponent/EditComponent";
 import Timer from "./Timer/Timer";
 import PropTypes from "prop-types";
 import TimeOnWork from "./TimeOnWork/TimeOnWork";
+import "./Task.css";
 
 class Task extends Component {
   state = {
