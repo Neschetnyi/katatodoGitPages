@@ -10,9 +10,9 @@ class TodoApp extends Component {
     createTask: (props) => {
       return {
         id: this.newId++,
-        title: this.props.title,
-        min: this.props.min,
-        sec: this.props.sec,
+        title: props.title,
+        min: props.min,
+        sec: props.sec,
         checked: false,
         creationDate: Date.now(),
       };
