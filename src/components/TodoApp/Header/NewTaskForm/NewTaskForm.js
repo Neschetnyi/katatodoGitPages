@@ -32,7 +32,12 @@ class NewTaskForm extends Component {
     e.preventDefault();
     if (this.state.title !== "") {
       console.log("state in NewTaskForm", this.state);
-
+      if (this.state.min === "" && this.state.sec === "") {
+        this.setState({
+          min: "0",
+          sec: "0", // Обнуляем и другие поля
+        });
+      }
       this.props.actions.addTask({
         title: this.state.title,
         min: this.state.min,
