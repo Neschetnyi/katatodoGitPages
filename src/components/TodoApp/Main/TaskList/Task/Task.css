@@ -59,6 +59,7 @@
 
 label {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   padding: 15px 85px 15px 60px;
@@ -68,12 +69,12 @@ label {
   position: relative;
 }
 
-label .description {
+.description {
   font-size: 13px;
   color: gray;
 }
 
-label .title {
+.title {
   word-break: break-all;
   display: block;
   line-height: 1.2;
@@ -87,7 +88,7 @@ label .title {
   text-decoration: line-through;
 }
 
-label .created {
+.created {
   width: 20%;
   font-size: 13px;
   color: gray;
