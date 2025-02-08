@@ -24,6 +24,7 @@ class NewTaskForm extends Component {
   };
 
   render() {
+    console.log(this.props.actions);
     return (
       <form onSubmit={this.onSubmit} className="new-todo-form">
         <input

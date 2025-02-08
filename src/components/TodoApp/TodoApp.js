@@ -139,16 +139,4 @@ class TodoApp extends Component {
   }
 }
 
-TodoApp.defaultProps = {
-  tasks: [],
-  unComplitedTasks: 0,
-  viewMode: "all",
-};
-
-TodoApp.propTypes = {
-  tasks: PropTypes.array,
-  unComplitedTasks: PropTypes.number,
-  viewMode: PropTypes.string,
-};
-
 export default TodoApp;
