@@ -32,41 +32,36 @@ class NewTaskForm extends Component {
     e.preventDefault();
     if (this.state.title === "") {
       alert("Введите задачу");
-    } else if (this.state.min === "" && this.state.sec !== "") {
-      console.log('if min = ""');
-      this.props.actions.addTask({
-        title: this.state.title,
-        min: 0,
-        sec: this.state.sec,
-      });
-    } else if (this.state.sec === "" && this.state.min !== "") {
-      console.log('if sec = ""');
-      this.props.actions.addTask({
-        title: this.state.title,
-        min: this.state.min,
-        sec: 0,
-      });
-    } else if (this.state.sec === "" && this.state.min === "") {
-      console.log('if sec = "" & min = ""');
-      this.props.actions.addTask({
-        title: this.state.title,
-        min: 0,
-        sec: 0,
-      });
     } else {
-      console.log("if min & sec exists");
-      this.props.actions.addTask({
+      let tempOutput = {
         title: this.state.title,
         min: this.state.min,
         sec: this.state.sec,
-      });
+      };
+
+      if (tempOutput.sec === "") {
+        tempOutput.min = 0;
+      }
+      if (tempOutput.min === "") {
+        tempOutput.sec = 0;
+      }
+      if (tempOutput.hour === "") {
+        tempOutput.hour = 0;
+      }
+      if (tempOutput.day === "") {
+        tempOutput.day = 0;
+      }
+      console.log("time data exists", tempOutput);
+      this.props.actions.addTask(tempOutput);
     }
 
     console.log("input value is:", this.state.title);
     this.setState({
       title: "",
       min: "",
-      sec: "", // Обнуляем и другие поля
+      sec: "",
+      hour: "",
+      day: "", // Обнуляем и другие поля
     });
     this.props.actions.viewUnComplitedTasksCount();
   };
@@ -88,6 +83,22 @@ class NewTaskForm extends Component {
           placeholder="Что сделать?"
           autoFocus
           value={this.state.title}
+          onChange={this.onChange}
+          onKeyDown={this.handleKeyPress} // Обработка нажатия клавиши
+        />
+        <input
+          className="new-todo-form__timer"
+          name="day"
+          placeholder="Day"
+          value={this.state.hour}
+          onChange={this.onChange}
+          onKeyDown={this.handleKeyPress} // Обработка нажатия клавиши
+        />
+        <input
+          className="new-todo-form__timer"
+          name="hour"
+          placeholder="Hour"
+          value={this.state.hour}
           onChange={this.onChange}
           onKeyDown={this.handleKeyPress} // Обработка нажатия клавиши
         />

@@ -13,6 +13,8 @@ class TodoApp extends Component {
         title: props.title,
         min: props.min,
         sec: props.sec,
+        hour: props.hour,
+        day: props.day,
         checked: false,
         creationDate: Date.now(),
       };
