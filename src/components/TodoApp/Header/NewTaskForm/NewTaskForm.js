@@ -5,8 +5,8 @@ import "./NewTaskForm.css";
 class NewTaskForm extends Component {
   state = {
     title: "",
-    min: 0,
-    sec: 0,
+    min: "",
+    sec: "",
   };
 
   onChange = (e) => {
