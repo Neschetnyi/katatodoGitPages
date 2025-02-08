@@ -39,16 +39,16 @@ class NewTaskForm extends Component {
             sec: "0", // Обнуляем и другие поля
           },
           () => {
-            this.props.actions.addTask({
-              title: this.state.title,
-              min: this.state.min,
-              sec: this.state.sec,
-            });
             console.log(
               "state in NewTaskForm min & sec",
               this.state.min,
               this.state.sec
             );
+            this.props.actions.addTask({
+              title: this.state.title,
+              min: this.state.min,
+              sec: this.state.sec,
+            });
           }
         );
       } else {
