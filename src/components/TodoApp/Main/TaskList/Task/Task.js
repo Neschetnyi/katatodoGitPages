@@ -25,11 +25,6 @@ class Task extends Component {
   };
 
   render() {
-    console.log(
-      `creation date of ${this.props.title}:`,
-      this.props.creationDate
-    );
-
     let editComponent = null;
     if (this.state.edit) {
       editComponent = (
@@ -55,8 +50,6 @@ class Task extends Component {
     if (this.state.edit) {
       classNames += "editing ";
     }
-
-    console.log("render single task", this.props);
 
     return (
       <li className={classNames}>

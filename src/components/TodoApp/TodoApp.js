@@ -85,7 +85,6 @@ class TodoApp extends Component {
 
     // Сохраняем данные в localStorage
     saveToLocalStorage: () => {
-      console.log("save to storage");
       const { tasks, unComplitedTasks, viewMode } = this.state;
       localStorage.setItem(
         "todoAppState",
@@ -105,7 +104,7 @@ class TodoApp extends Component {
 
     handleBeforeUnload: (event) => {
       // Устанавливаем текст предупреждения
-      console.log("handleBeforeUnload");
+
       const message = "Вы закрываете список";
 
       // Для старых браузеров или специфических случаев необходимо вернуть message
@@ -124,8 +123,6 @@ class TodoApp extends Component {
   componentDidMount() {
     // Восстанавливаем состояние из localStorage при монтировании компонента
     this.actions.loadFromLocalStorage();
-    console.log("after load storage:", this.state);
-    console.log(`${this.state.onClose}`);
 
     // Считаем количество невыполненных задач
     this.actions.viewUnComplitedTasksCount();

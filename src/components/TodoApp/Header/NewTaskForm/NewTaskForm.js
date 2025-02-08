@@ -58,11 +58,10 @@ class NewTaskForm extends Component {
       if (tempOutput.day === "") {
         tempOutput.day = 0;
       }
-      console.log("time data exists", tempOutput);
+
       this.props.actions.addTask(tempOutput);
     }
 
-    console.log("input value is:", this.state.title);
     this.setState({
       title: "",
       min: "",
@@ -80,8 +79,6 @@ class NewTaskForm extends Component {
   };
 
   render() {
-    console.log("actions in NewTaskForm", this.props.actions);
-
     return (
       <form onSubmit={this.onSubmit} className="new-todo-form">
         <input
