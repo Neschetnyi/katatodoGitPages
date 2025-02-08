@@ -4,21 +4,21 @@ import "./NewTaskForm.css";
 
 class NewTaskForm extends Component {
   state = {
-    value: "",
+    title: "",
     min: "",
     sec: "",
   };
 
   onChange = (e) => {
     this.setState({
-      value: e.target.value,
+      title: e.target.value,
     });
   };
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.actions.addTask(this.state.value);
-    console.log("input value is:", this.state.value);
+    this.props.actions.addTask(this.state.title);
+    console.log("input value is:", this.state.title);
     this.setState({
       value: "",
     });
@@ -33,7 +33,7 @@ class NewTaskForm extends Component {
           className="new-todo"
           placeholder="Что сделать?"
           autoFocus
-          value={this.state.value}
+          value={this.state.title}
           onChange={this.onChange}
         />
         <input
