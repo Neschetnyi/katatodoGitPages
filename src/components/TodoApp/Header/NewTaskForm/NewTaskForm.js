@@ -97,7 +97,7 @@ class NewTaskForm extends Component {
           className="new-todo-form__timer"
           name="day"
           placeholder="Day"
-          value={this.state.hour}
+          value={this.state.day}
           onChange={this.onChange}
           onKeyDown={this.handleKeyPress} // Обработка нажатия клавиши
         />
