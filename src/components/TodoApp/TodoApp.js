@@ -7,12 +7,14 @@ class TodoApp extends Component {
   newId = 0;
 
   actions = {
-    createTask: (title) => {
+    createTask: (title, min, sec) => {
       return {
         id: this.newId++,
         title,
         checked: false,
         creationDate: Date.now(),
+        min,
+        sec,
       };
     },
 
