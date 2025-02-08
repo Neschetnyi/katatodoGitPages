@@ -5,6 +5,8 @@ import "./NewTaskForm.css";
 class NewTaskForm extends Component {
   state = {
     value: "",
+    min: "",
+    sec: "",
   };
 
   onChange = (e) => {
@@ -34,8 +36,18 @@ class NewTaskForm extends Component {
           value={this.state.value}
           onChange={this.onChange}
         />
-        <input class="new-todo-form__timer" placeholder="Мин" autofocus />
-        <input class="new-todo-form__timer" placeholder="Сек" autofocus />
+        <input
+          class="new-todo-form__timer"
+          placeholder="Мин"
+          autofocus
+          value={this.state.min}
+        />
+        <input
+          class="new-todo-form__timer"
+          placeholder="Сек"
+          autofocus
+          value={this.state.sec}
+        />
       </form>
     );
   }
