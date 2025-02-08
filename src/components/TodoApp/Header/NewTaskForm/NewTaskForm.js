@@ -7,6 +7,8 @@ class NewTaskForm extends Component {
     title: "",
     min: "",
     sec: "",
+    hour: "",
+    day: "",
   };
 
   onChange = (e) => {
@@ -40,6 +42,8 @@ class NewTaskForm extends Component {
         title: this.state.title,
         min: this.state.min,
         sec: this.state.sec,
+        hour: this.state.hour,
+        day: this.state.day,
       };
 
       if (tempOutput.sec === "") {
