@@ -36,7 +36,7 @@ class NewTaskForm extends Component {
         this.setState(
           () => {
             console.log(
-              "state in NewTaskForm min & sec",
+              "state in NewTaskForm min & sec before",
               this.state.min,
               this.state.sec
             );
