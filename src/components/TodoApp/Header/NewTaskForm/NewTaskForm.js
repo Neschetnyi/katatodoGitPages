@@ -36,18 +36,6 @@ class NewTaskForm extends Component {
           value={this.state.title}
           onChange={this.onChange}
         />
-        <input
-          class="new-todo-form__timer"
-          placeholder="Мин"
-          autofocus
-          value={this.state.min}
-        />
-        <input
-          class="new-todo-form__timer"
-          placeholder="Сек"
-          autofocus
-          value={this.state.sec}
-        />
       </form>
     );
   }
