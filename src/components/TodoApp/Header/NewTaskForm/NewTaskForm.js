@@ -11,7 +11,7 @@ class NewTaskForm extends Component {
 
   onChange = (e) => {
     this.setState({
-      title: e.target.value,
+      [e.target.name]: e.target.value, // Позволяет обновлять любое поле
     });
   };
 
@@ -35,14 +35,27 @@ class NewTaskForm extends Component {
     return (
       <form onSubmit={this.onSubmit} className="new-todo-form">
         <input
+          name="title"
           className="new-todo"
           placeholder="Что сделать?"
           autoFocus
           value={this.state.title}
           onChange={this.onChange}
         />
-        <input className="new-todo-form__timer" placeholder="Min" />
-        <input className="new-todo-form__timer" placeholder="Sec" />
+        <input
+          className="new-todo-form__timer"
+          name="min"
+          placeholder="Min"
+          value={this.state.min}
+          onChange={this.onChange}
+        />
+        <input
+          className="new-todo-form__timer"
+          name="sec"
+          placeholder="Sec"
+          value={this.state.sec}
+          onChange={this.onChange}
+        />
       </form>
     );
   }
