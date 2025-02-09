@@ -25,8 +25,8 @@ class TimeOnWork extends Component {
       <div class="description">
         <button class="icon icon-play"></button>
         <button class="icon icon-pause"></button>
-        {this.props.fullDate.getDate()}:{this.props.fullDate.getHours()}:
-        {this.props.fullDate.getMinutes()}:{this.props.fullDate.getSeconds()}
+        {this.props.timeInSec}:{this.props.timeInSec / 60}:
+        {this.props.timeInSec / 3600}:{this.props.timeInSec / 86400}
       </div>
     );
   }

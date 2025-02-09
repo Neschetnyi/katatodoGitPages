@@ -15,7 +15,7 @@ class TodoApp extends Component {
         sec: props.sec,
         hour: props.hour,
         day: props.day,
-        fullDate: this.actions.DateConversion({
+        timeInSec: this.actions.TimeToSecConversion({
           min: props.min,
           sec: props.sec,
           hour: props.hour,
@@ -26,8 +26,8 @@ class TodoApp extends Component {
       };
     },
 
-    DateConversion: ({ sec, min, hour, day }) => {
-      return new Date(0, 0, day, hour, min, sec, 0);
+    TimeToSecConversion: ({ sec, min, hour, day }) => {
+      return sec + min * 60 + hour * 3600 + day * 86400;
     },
 
     deleteTask: (id) => {
@@ -62,13 +62,13 @@ class TodoApp extends Component {
       }, this.actions.saveToLocalStorage);
     },
 
-    changingTimeState: (id, time) => {
+    changingTimeState: (id, timeInSec) => {
       this.setState(({ tasks }) => {
         let tempArr = [...tasks];
         let Index = tasks.findIndex((el) => el.id === id);
         let before = tempArr.slice(0, Index);
         let after = tempArr.slice(Index + 1);
-        let newTask = { ...tempArr[Index], time };
+        let newTask = { ...tempArr[Index], timeInSec };
         let newArr = [...before, newTask, ...after];
 
         return { tasks: newArr };
