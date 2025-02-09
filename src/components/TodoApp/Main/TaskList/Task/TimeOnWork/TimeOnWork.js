@@ -54,6 +54,10 @@ class TimeOnWork extends Component {
     }
   }
 
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
   state = {
     day: "",
     hour: "",
