@@ -37,7 +37,7 @@ class TimeOnWork extends Component {
     });
     this.timer = setInterval(() => {
       let newTimeINSec = this.state.timeInSec - 1;
-      this.props.changeTimeState(this.props.id, newTimeINSec);
+      this.props.changingTimeState(this.props.id, newTimeINSec);
     }, 1000);
   }
 
