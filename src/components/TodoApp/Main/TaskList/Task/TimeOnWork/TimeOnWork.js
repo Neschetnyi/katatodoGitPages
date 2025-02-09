@@ -26,6 +26,17 @@ class TimeOnWork extends Component {
     return { dayF, hourF, minF, SecF, ResultSec };
   };
 
+  onPlay = () => {
+    this.timer = setInterval(() => {
+      this.setState({
+        timeInSec: this.state.timeInSec + 1,
+      });
+    }, 1000);
+  };
+  onStop = () => {
+    clearInterval(this.timer);
+  };
+
   componentDidMount() {
     let time = this.secondsConverter(this.props.timeInSec);
     this.setState({
@@ -35,10 +46,6 @@ class TimeOnWork extends Component {
       sec: time.SecF,
       timeInSec: time.ResultSec,
     });
-    this.timer = setInterval(() => {
-      let newTimeINSec = this.state.timeInSec - 1;
-      this.props.changingTimeState(this.props.id, newTimeINSec);
-    }, 1000);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -71,8 +78,8 @@ class TimeOnWork extends Component {
     console.log("State in timerOnWork", this.state);
     return (
       <div class="description">
-        <button class="icon icon-play"></button>
-        <button class="icon icon-pause"></button>
+        <button class="icon icon-play" onClick={this.onPlay}></button>
+        <button class="icon icon-pause" onClick={this.onStop}></button>
         {this.state.day}:{this.state.hour}:{this.state.min}:{this.state.sec}
       </div>
     );
