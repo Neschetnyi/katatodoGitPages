@@ -66,12 +66,7 @@ class Task extends Component {
           <label>
             <div className={classNamesDescription}>{this.props.title} </div>
             <div className="timersContainer">
-              <TimeOnWork
-                day={this.props.day}
-                hour={this.props.hour}
-                min={this.props.min}
-                sec={this.props.sec}
-              />
+              <TimeOnWork {...this.props} />
               <div className="created">
                 <Timer creationDate={this.props.creationDate} />
               </div>
