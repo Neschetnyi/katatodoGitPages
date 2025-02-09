@@ -26,6 +26,8 @@ class TimeOnWork extends Component {
     return { dayF, hourF, minF, SecF, ResultSec };
   };
 
+  timer = null;
+
   onPlay() {
     this.timer = setInterval(() => {
       let newTimeInSec = this.state.timeInSec - 1;
