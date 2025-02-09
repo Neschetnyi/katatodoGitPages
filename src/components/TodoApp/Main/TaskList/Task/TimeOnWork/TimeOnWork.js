@@ -25,11 +25,14 @@ class TimeOnWork extends Component {
       <div class="description">
         <button class="icon icon-play"></button>
         <button class="icon icon-pause"></button>
-        {this.props.fullDate.getDate()}:{this.props.fullDate.getHours()}:
-        {this.props.fullDate.getMinutes()}:{this.props.fullDate.getSeconds()}
       </div>
     );
   }
 }
 
 export default TimeOnWork;
+/*
+ {this.props.fullDate.getDate()}:{this.props.fullDate.getHours()}:
+        {this.props.fullDate.getMinutes()}:{this.props.fullDate.getSeconds()}
+
+*/
