@@ -29,7 +29,7 @@ class TimeOnWork extends Component {
   onPlay = () => {
     this.timer = setInterval(() => {
       this.setState({
-        timeInSec: this.state.timeInSec + 1,
+        timeInSec: this.state.timeInSec - 1,
       });
     }, 1000);
   };
@@ -50,6 +50,8 @@ class TimeOnWork extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.timeInSec !== this.props.timeInSec) {
+      console.log("Lets update!");
+
       let time = this.secondsConverter(this.props.timeInSec);
       this.setState({
         day: time.dayF,
