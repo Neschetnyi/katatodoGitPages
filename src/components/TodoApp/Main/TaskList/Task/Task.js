@@ -25,8 +25,6 @@ class Task extends Component {
   };
 
   render() {
-    console.log("single Task props:", this.props);
-
     let editComponent = null;
     if (this.state.edit) {
       editComponent = (
