@@ -27,7 +27,11 @@ class TodoApp extends Component {
     },
 
     TimeToSecConversion: ({ day, hour, min, sec }) => {
-      let result = sec + min * 60 + hour * 3600 + day * 86400;
+      let result =
+        Number(sec) +
+        Number(min) * 60 +
+        Number(hour) * 3600 +
+        Number(day) * 86400;
       console.log(
         "TimeToSecConversion",
         sec,
