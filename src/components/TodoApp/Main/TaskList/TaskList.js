@@ -8,11 +8,13 @@ const TaskList = ({ data, actions }) => {
     for (let i = 0; i < taskList.length; i++) {
       tasksNewArr = taskList.map((task) => {
         let { id, ...prop } = task;
+
         return (
           <Task
             key={id}
             id={id}
             {...prop}
+            {...actions}
             deleteTask={() => actions.deleteTask(id)}
             togleCecked={() => actions.togleCecked(id)}
             viewUnComplitedTasksCount={() =>
