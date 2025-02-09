@@ -51,7 +51,7 @@ class Task extends Component {
     if (this.state.edit) {
       classNames += "editing ";
     }
-
+    console.log("single task props", this.props);
     return (
       <li className={classNames}>
         <div className="view">
