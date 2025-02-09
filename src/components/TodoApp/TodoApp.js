@@ -52,6 +52,19 @@ class TodoApp extends Component {
       }, this.actions.saveToLocalStorage);
     },
 
+    changingTime: (id, time) => {
+      this.setState(({ tasks }) => {
+        let tempArr = [...tasks];
+        let Index = tasks.findIndex((el) => el.id === id);
+        let before = tempArr.slice(0, Index);
+        let after = tempArr.slice(Index + 1);
+        let newTask = { ...tempArr[Index], ...time };
+        let newArr = [...before, newTask, ...after];
+
+        return { tasks: newArr };
+      }, this.actions.saveToLocalStorage);
+    },
+
     clearComplitedTasks: () => {
       this.setState(({ tasks }) => {
         let newArr = tasks.filter((el) => el.checked === false);

@@ -9,6 +9,7 @@ class TimeOnWork extends Component {
   };
 
   render() {
+    console.log("Props in timerOnWork", this.props);
     return (
       <div class="description">
         <button class="icon icon-play"></button>
