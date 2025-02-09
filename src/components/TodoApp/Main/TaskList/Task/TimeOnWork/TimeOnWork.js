@@ -26,18 +26,16 @@ class TimeOnWork extends Component {
     return { dayF, hourF, minF, SecF, ResultSec };
   };
 
-  timer = null;
-
-  onPlay() {
+  onPlay = () => {
     this.timer = setInterval(() => {
       let newTimeInSec = this.state.timeInSec - 1;
       this.props.changingTimeState(this.props.id, newTimeInSec);
     }, 1000);
-  }
+  };
 
-  onStop() {
+  onStop = () => {
     clearInterval(this.timer);
-  }
+  };
 
   componentDidMount() {
     let time = this.secondsConverter(this.props.timeInSec);
