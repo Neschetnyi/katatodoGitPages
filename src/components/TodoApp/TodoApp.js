@@ -27,7 +27,7 @@ class TodoApp extends Component {
     },
 
     DateConversion: ({ sec, min, hour, day }) => {
-      return new Date(0, 0, day, hour, min, sec, 0).toLocaleString();
+      return new Date(0, 0, day, hour, min, sec, 0);
     },
 
     deleteTask: (id) => {
