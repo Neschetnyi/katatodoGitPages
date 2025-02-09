@@ -15,12 +15,12 @@ class TodoApp extends Component {
         sec: props.sec,
         hour: props.hour,
         day: props.day,
-        fullDate: this.actions.DateConversion({
+        /* fullDate: this.actions.DateConversion({
           min: props.min,
           sec: props.sec,
           hour: props.hour,
           day: props.day,
-        }),
+        }), */
         checked: false,
         creationDate: Date.now(),
       };
