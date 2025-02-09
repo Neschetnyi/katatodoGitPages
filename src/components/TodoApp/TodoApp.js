@@ -73,7 +73,7 @@ class TodoApp extends Component {
         let Index = tasks.findIndex((el) => el.id === id);
         let before = tempArr.slice(0, Index);
         let after = tempArr.slice(Index + 1);
-        let newTask = { ...tempArr[Index], ...time };
+        let newTask = { ...tempArr[Index], time };
         let newArr = [...before, newTask, ...after];
 
         return { tasks: newArr };
