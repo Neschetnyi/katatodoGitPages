@@ -15,9 +15,24 @@ class TodoApp extends Component {
         sec: props.sec,
         hour: props.hour,
         day: props.day,
+        fullDate: this.actions.DateConversion({
+          min: props.min,
+          sec: props.sec,
+          hour: props.hour,
+          day: props.day,
+        }),
         checked: false,
         creationDate: Date.now(),
       };
+    },
+
+    DateConversion: ({ sec, min, hour, day }) => {
+      return new Date(
+        sec * 1000 +
+          min * 60 * 1000 +
+          hour * 60 * 60 * 1000 +
+          day * 24 * 60 * 60 * 1000
+      ).toLocaleString();
     },
 
     deleteTask: (id) => {
@@ -52,7 +67,7 @@ class TodoApp extends Component {
       }, this.actions.saveToLocalStorage);
     },
 
-    changingTime: (id, time) => {
+    changingTimeState: (id, time) => {
       this.setState(({ tasks }) => {
         let tempArr = [...tasks];
         let Index = tasks.findIndex((el) => el.id === id);

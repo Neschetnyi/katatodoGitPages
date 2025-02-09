@@ -8,6 +8,17 @@ class TimeOnWork extends Component {
     sec: this.props.sec,
   };
 
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      this.props.changeTimeState(this.props.id, {
+        day: this.props.day,
+        hour: this.props.hour,
+        min: this.props.min,
+        sec: this.props.sec,
+      });
+    }, 1000);
+  }
+
   render() {
     console.log("Props in timerOnWork", this.props);
     return (
