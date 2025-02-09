@@ -25,16 +25,8 @@ class TimeOnWork extends Component {
       <div class="description">
         <button class="icon icon-play"></button>
         <button class="icon icon-pause"></button>
-        {this.props.timeInSec -
-          (this.props.timeInSec % 60) -
-          (this.props.timeInSec % 3600) -
-          (this.props.timeInSec % 86400)}
-        :
-        {(this.props.timeInSec % 60) -
-          (this.props.timeInSec % 3600) -
-          (this.props.timeInSec % 86400)}
-        :{(this.props.timeInSec % 3600) - (this.props.timeInSec % 86400)}:
-        {this.props.timeInSec % 86400}
+        {this.props.timeInSec % 86400}:{this.props.timeInSec % 3600}:
+        {this.props.timeInSec % 60}:{this.props.timeInSec}
       </div>
     );
   }
