@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/katatodoGitPages/static/css/main.64f49d2a.css",
+    "main.css": "/katatodoGitPages/static/css/main.fc1a94ec.css",
     "main.js": "/katatodoGitPages/static/js/main.9ebbc35c.js",
     "index.html": "/katatodoGitPages/index.html",
-    "main.64f49d2a.css.map": "/katatodoGitPages/static/css/main.64f49d2a.css.map",
+    "main.fc1a94ec.css.map": "/katatodoGitPages/static/css/main.fc1a94ec.css.map",
     "main.9ebbc35c.js.map": "/katatodoGitPages/static/js/main.9ebbc35c.js.map"
   },
   "entrypoints": [
-    "static/css/main.64f49d2a.css",
+    "static/css/main.fc1a94ec.css",
     "static/js/main.9ebbc35c.js"
   ]
 }
