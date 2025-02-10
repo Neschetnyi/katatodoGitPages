@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./index.css";
 
 class TimeOnWork extends Component {
   secondsConverter = (seconds = 0) => {
@@ -83,7 +84,7 @@ class TimeOnWork extends Component {
     console.log("Props in timerOnWork", this.props);
     console.log("State in timerOnWork", this.state);
     return (
-      <div>
+      <div className="timerNumbers">
         <button class="icon icon-play" onClick={this.onPlay}></button>
         <button class="icon icon-pause" onClick={this.onStop}></button>
         <span class="timerNumbers"></span>
