@@ -27,10 +27,12 @@ class TimeOnWork extends Component {
   };
 
   onPlay = () => {
-    this.timer = setInterval(() => {
-      let newTimeInSec = this.state.timeInSec - 1;
-      this.props.changingTimeState(this.props.id, newTimeInSec);
-    }, 1000);
+    if (this.props.timeInSec !== 0) {
+      this.timer = setInterval(() => {
+        let newTimeInSec = this.state.timeInSec - 1;
+        this.props.changingTimeState(this.props.id, newTimeInSec);
+      }, 1000);
+    }
   };
 
   onStop = () => {
