@@ -245,6 +245,11 @@ html .clear-completed:active {
     height: 50px;
   }
 
+  .todoapp h1 {
+    font-size: 40px;
+    font-weight: 200;
+  }
+
   .filters {
     bottom: 10px;
   }
