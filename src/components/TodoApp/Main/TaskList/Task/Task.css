@@ -150,6 +150,10 @@ label {
   padding-top: 5px;
 }
 
+.icon-pause {
+  padding-top: 3px;
+}
+
 .icon-play {
   font-size: 15px;
 }
@@ -166,6 +170,7 @@ label {
   font-size: 12px;
   font-weight: 100;
   padding-bottom: 5px;
+  padding-left: 5px;
   color: gray;
 }
 
