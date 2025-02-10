@@ -75,6 +75,12 @@ label {
   color: gray;
 }
 
+.description .timerNumbers {
+  font-size: 8px;
+  font-weight: 100;
+  color: gray;
+}
+
 .title {
   word-break: break-all;
   display: block;
