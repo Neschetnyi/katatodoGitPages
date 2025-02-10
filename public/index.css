@@ -246,6 +246,7 @@ html .clear-completed:active {
   }
 
   .todoapp h1 {
+    padding-top: 15px;
     font-size: 30px;
     font-weight: 200;
   }
