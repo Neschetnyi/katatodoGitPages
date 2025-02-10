@@ -83,7 +83,7 @@ class TimeOnWork extends Component {
     console.log("Props in timerOnWork", this.props);
     console.log("State in timerOnWork", this.state);
     return (
-      <div class="description">
+      <div>
         <button class="icon icon-play" onClick={this.onPlay}></button>
         <button class="icon icon-pause" onClick={this.onStop}></button>
         <span class="timerNumbers"></span>
