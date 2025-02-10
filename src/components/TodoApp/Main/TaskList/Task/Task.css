@@ -98,7 +98,7 @@ label {
 }
 
 .created {
-  width: 50%;
+  width: fit-content;
   font-size: 10px;
   color: gray;
 }
