@@ -86,6 +86,7 @@ class TimeOnWork extends Component {
       <div class="description">
         <button class="icon icon-play" onClick={this.onPlay}></button>
         <button class="icon icon-pause" onClick={this.onStop}></button>
+        <span class="timerNumbers"></span>
         {this.state.day}:{this.state.hour}:{this.state.min}:{this.state.sec}
       </div>
     );

@@ -162,6 +162,12 @@ label {
   content: "▶";
 }
 
+.timerNumbers {
+  font-size: 12px;
+  font-weight: 200;
+  color: gray;
+}
+
 .edit {
   display: none;
 }
