@@ -56,6 +56,9 @@ class TimeOnWork extends Component {
       if (this.props.timeInSec === 0) {
         clearInterval(this.timer);
       }
+      if (this.props.checked) {
+        clearInterval(this.timer);
+      }
       let time = this.secondsConverter(this.props.timeInSec);
       this.setState({
         day: time.dayF,
