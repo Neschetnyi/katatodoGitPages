@@ -28,49 +28,24 @@ class Task extends Component {
     this.setState({ edit: !this.state.edit });
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.timeInSec !== this.props.timeInSec) {
+      this.props.viewUnComplitedTasksCount();
+    }
+  }
+
   componentDidMount() {
     console.log(
       "componentDidMount time of Unmount: ",
-      this.props.additionalTime
+      this.props.timeOfUnmount
     );
     if (this.props.play) {
-      console.log("componentDidMount play: ", this.props.play);
       let time = Date.now();
       let addingTime =
-        this.state.timeInSec -
+        this.props.timeInSec -
         Math.trunc((time - this.props.timeOfUnmount) / 1000);
-      console.log("type of addingTime:", typeof addingTime);
-
-      function secondsConverter(seconds) {
-        console.log("secondsConverter input", seconds);
-        let ResultSec = seconds;
-        console.log("secondsConverter ResultSec", ResultSec);
-        let dayF = (ResultSec - (ResultSec % 86400)) / 86400;
-        console.log("secondsConverter dayF", dayF);
-        let hourMinSec = ResultSec - dayF * 86400;
-
-        let hourMinSecOst = hourMinSec % 3600;
-        let hoursInSec = hourMinSec - hourMinSecOst;
-        let hourF = hoursInSec / 3600;
-        console.log("secondsConverter hourF", hourF);
-        let minSec = hourMinSec - hoursInSec;
-        let minSecOst = minSec % 60;
-        let minInSec = minSec - minSecOst;
-        let minF = minInSec / 60;
-        let SecF = ResultSec - dayF * 86400 - hourF * 3600 - minF * 60;
-        console.log("secondsConverter", dayF, hourF, minF, SecF, ResultSec);
-        return { dayF, hourF, minF, SecF, ResultSec };
-      }
-      let obj = secondsConverter(this.state.timeInSec);
-      this.props.changingTimeState(this.props.id, obj);
-      console.log("time", time);
-      console.log("this.props.additionalTime", this.props.timeOfUnmount);
-      console.log(
-        "difference",
-        this.state.timeInSec -
-          Math.trunc((time - this.props.additionalTime) / 1000)
-      );
-      console.log("result:", addingTime);
+      this.props.changingTimeState(this.props.id, addingTime);
+      this.props.toglePlayFalse(this.props.id);
     }
   }
 

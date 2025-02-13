@@ -52,12 +52,18 @@ class TimeOnWork extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.timeInSec !== this.props.timeInSec) {
+    if (
+      prevProps.timeInSec !== this.props.timeInSec ||
+      (prevProps.play !== this.props.play && !this.props.paused)
+    ) {
       console.log("lets Update");
       if (this.props.timeInSec === 0) {
         clearInterval(this.timer);
       }
       if (this.props.checked) {
+        clearInterval(this.timer);
+      }
+      if (this.props.play) {
         clearInterval(this.timer);
       }
       let time = this.secondsConverter(this.props.timeInSec);
