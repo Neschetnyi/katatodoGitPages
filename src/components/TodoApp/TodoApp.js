@@ -8,6 +8,9 @@ class TodoApp extends Component {
 
   actions = {
     createTask: (props) => {
+      let time = Date.now();
+      console.log("createTask", time, "type of :", typeof time);
+
       return {
         id: this.newId++,
         title: props.title,
@@ -22,7 +25,12 @@ class TodoApp extends Component {
           day: props.day,
         }),
         checked: false,
-        creationDate: Date.now(),
+        paused: false,
+        play: false,
+        timeOfUnmount: 0,
+        additionalTime: 0,
+        creationDate: time,
+        deleted: false,
       };
     },
 
@@ -51,7 +59,6 @@ class TodoApp extends Component {
         let before = tasks.slice(0, index);
         let after = tasks.slice(index + 1);
         let newArr = [...before, ...after];
-
         return {
           tasks: newArr,
         };
@@ -76,6 +83,54 @@ class TodoApp extends Component {
       }, this.actions.saveToLocalStorage);
     },
 
+    toglePlayTrue: (id) => {
+      this.setState(({ tasks }) => {
+        let tempArr = [...tasks];
+        let Index = tasks.findIndex((el) => el.id === id);
+        let before = tempArr.slice(0, Index);
+        let after = tempArr.slice(Index + 1);
+        let newTask = { ...tempArr[Index], play: true };
+        let newArr = [...before, newTask, ...after];
+        return { tasks: newArr };
+      }, this.actions.saveToLocalStorage);
+    },
+
+    toglePlayFalse: (id) => {
+      this.setState(({ tasks }) => {
+        let tempArr = [...tasks];
+        let Index = tasks.findIndex((el) => el.id === id);
+        let before = tempArr.slice(0, Index);
+        let after = tempArr.slice(Index + 1);
+        let newTask = { ...tempArr[Index], play: false };
+        let newArr = [...before, newTask, ...after];
+        return { tasks: newArr };
+      }, this.actions.saveToLocalStorage);
+    },
+
+    toglePausedTrue: (id) => {
+      this.setState(({ tasks }) => {
+        let tempArr = [...tasks];
+        let Index = tasks.findIndex((el) => el.id === id);
+        let before = tempArr.slice(0, Index);
+        let after = tempArr.slice(Index + 1);
+        let newTask = { ...tempArr[Index], paused: true };
+        let newArr = [...before, newTask, ...after];
+        return { tasks: newArr };
+      }, this.actions.saveToLocalStorage);
+    },
+
+    toglePausedFalse: (id) => {
+      this.setState(({ tasks }) => {
+        let tempArr = [...tasks];
+        let Index = tasks.findIndex((el) => el.id === id);
+        let before = tempArr.slice(0, Index);
+        let after = tempArr.slice(Index + 1);
+        let newTask = { ...tempArr[Index], paused: false };
+        let newArr = [...before, newTask, ...after];
+        return { tasks: newArr };
+      }, this.actions.saveToLocalStorage);
+    },
+
     changingTimeState: (id, timeInSec) => {
       this.setState(({ tasks }) => {
         let tempArr = [...tasks];
@@ -92,6 +147,43 @@ class TodoApp extends Component {
     clearComplitedTasks: () => {
       this.setState(({ tasks }) => {
         let newArr = tasks.filter((el) => el.checked === false);
+        return { tasks: newArr };
+      }, this.actions.saveToLocalStorage);
+    },
+
+    clearingTimeOfUnmount: (id) => {
+      this.setState(({ tasks }) => {
+        let tempArr = [...tasks];
+        let Index = tasks.findIndex((el) => el.id === id);
+        let before = tempArr.slice(0, Index);
+        let after = tempArr.slice(Index + 1);
+        let newTask = { ...tempArr[Index], timeOfUnmount: 0 };
+        let newArr = [...before, newTask, ...after];
+        return { tasks: newArr };
+      }, this.actions.saveToLocalStorage);
+    },
+
+    setingDeletedTrue: (id) => {
+      this.setState(({ tasks }) => {
+        let tempArr = [...tasks];
+        let Index = tasks.findIndex((el) => el.id === id);
+        let before = tempArr.slice(0, Index);
+        let after = tempArr.slice(Index + 1);
+        let newTask = { ...tempArr[Index], deleted: true };
+        let newArr = [...before, newTask, ...after];
+        return { tasks: newArr };
+      }, this.actions.saveToLocalStorage);
+    },
+
+    setingTimeOfUnmount: (id) => {
+      let time = Date.now();
+      this.setState(({ tasks }) => {
+        let tempArr = [...tasks];
+        let Index = tasks.findIndex((el) => el.id === id);
+        let before = tempArr.slice(0, Index);
+        let after = tempArr.slice(Index + 1);
+        let newTask = { ...tempArr[Index], timeOfUnmount: time };
+        let newArr = [...before, newTask, ...after];
         return { tasks: newArr };
       }, this.actions.saveToLocalStorage);
     },
@@ -158,6 +250,7 @@ class TodoApp extends Component {
   };
 
   componentDidMount() {
+    localStorage.clear();
     // Восстанавливаем состояние из localStorage при монтировании компонента
     this.actions.loadFromLocalStorage();
 

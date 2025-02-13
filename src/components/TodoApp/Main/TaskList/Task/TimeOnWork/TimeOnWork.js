@@ -14,32 +14,33 @@ class TimeOnWork extends Component {
     let minF = minInSec / 60;
     let SecF = ResultSec - dayF * 86400 - hourF * 3600 - minF * 60;
 
-    console.log("ResultSec:", ResultSec);
-    console.log("");
-    console.log("day:", dayF);
-    console.log("");
-    console.log("hour:", hourF);
-    console.log("");
-    console.log("min:", minF);
-    console.log("");
-    console.log("Sec:", SecF);
     return { dayF, hourF, minF, SecF, ResultSec };
   };
 
   onPlay = () => {
-    if (this.props.timeInSec !== 0) {
+    if (
+      this.props.timeInSec !== 0 &&
+      !this.props.checked &&
+      !this.props.paused &&
+      !this.props.play
+    ) {
       this.timer = setInterval(() => {
         let newTimeInSec = this.state.timeInSec - 1;
         this.props.changingTimeState(this.props.id, newTimeInSec);
       }, 1000);
+      this.props.toglePlayTrue(this.props.id);
     }
   };
 
   onStop = () => {
     clearInterval(this.timer);
+    this.props.toglePlayFalse(this.props.id);
   };
 
   componentDidMount() {
+    clearInterval(this.timer);
+
+    this.props.clearingTimeOfUnmount(this.props.id);
     let time = this.secondsConverter(this.props.timeInSec);
     this.setState({
       day: time.dayF,

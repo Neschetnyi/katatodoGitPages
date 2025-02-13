@@ -19,6 +19,12 @@ class Timer extends Component {
     }, 1000);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.deleted !== this.props.deleted) {
+      clearInterval(this.timer);
+    }
+  }
+
   componentWillUnmount() {
     clearInterval(this.timer);
   }
