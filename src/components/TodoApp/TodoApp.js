@@ -281,7 +281,7 @@ class TodoApp extends Component {
   };
 
   componentDidMount() {
-    localStorage.clear();
+    // localStorage.clear();
     // Восстанавливаем состояние из localStorage при монтировании компонента
     this.actions.loadFromLocalStorage();
 
