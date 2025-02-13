@@ -36,7 +36,7 @@ class Task extends Component {
 
   componentDidMount() {
     console.log(
-      "componentDidMount time of Unmount: ",
+      "componentDidMount in Task time of Unmount: ",
       this.props.timeOfUnmount
     );
     if (this.props.play) {
@@ -45,13 +45,13 @@ class Task extends Component {
         this.props.timeInSec -
         Math.trunc((time - this.props.timeOfUnmount) / 1000);
       this.props.changingTimeState(this.props.id, addingTime);
-      this.props.toglePlayFalse(this.props.id);
     }
   }
 
   componentWillUnmount() {
-    console.log("componentWillUnmount");
-    if (!this.props.deleted) {
+    console.log("componentWillUnmount in Task");
+    if (!this.props.deleted && this.props.id) {
+      console.log("componentWillUnmount in Task !this.props.deleted");
       this.props.setingTimeOfUnmount(this.props.id);
     }
   }
@@ -97,12 +97,7 @@ class Task extends Component {
             <div className={classNamesDescription}>{this.props.title} </div>
             <div className="timersContainer">
               <TimeOnWork {...this.props} />
-              <div className="created">
-                <Timer
-                  deleted={this.props.deleted}
-                  creationDate={this.props.creationDate}
-                />
-              </div>
+              <div className="created"></div>
             </div>
 
             <button
@@ -122,3 +117,9 @@ class Task extends Component {
 }
 
 export default Task;
+
+/* <Timer
+deleted={this.props.deleted}
+creationDate={this.props.creationDate}
+/>
+*/

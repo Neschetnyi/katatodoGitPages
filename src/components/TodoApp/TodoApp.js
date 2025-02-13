@@ -52,6 +52,37 @@ class TodoApp extends Component {
       return result;
     },
 
+    secondsConverter: (seconds = 0) => {
+      let ResultSec = seconds;
+      let dayF = (ResultSec - (ResultSec % 86400)) / 86400;
+      let hourMinSec = ResultSec - dayF * 86400;
+      let hourMinSecOst = hourMinSec % 3600;
+      let hoursInSec = hourMinSec - hourMinSecOst;
+      let hourF = hoursInSec / 3600;
+      let minSec = hourMinSec - hoursInSec;
+      let minSecOst = minSec % 60;
+      let minInSec = minSec - minSecOst;
+      let minF = minInSec / 60;
+      let SecF = ResultSec - dayF * 86400 - hourF * 3600 - minF * 60;
+
+      return { dayF, hourF, minF, SecF, ResultSec };
+    },
+
+    timeDecrementation: (id) => {
+      this.setState(({ tasks }) => {
+        let tempArr = [...tasks];
+        let Index = tasks.findIndex((el) => el.id === id);
+        let before = tempArr.slice(0, Index);
+        let after = tempArr.slice(Index + 1);
+        let timeInSec = {
+          ...tempArr[Index],
+          timeInSec: this.state.tasks[Index].timeInSec - 1,
+        };
+        let newArr = [...before, timeInSec, ...after];
+        return { tasks: newArr };
+      }, this.actions.saveToLocalStorage);
+    },
+
     deleteTask: (id) => {
       this.setState(({ tasks }) => {
         let index = tasks.findIndex((el) => el.id === id);
