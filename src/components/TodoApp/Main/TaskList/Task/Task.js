@@ -9,7 +9,7 @@ class Task extends Component {
   state = {
     edit: false,
   };
-
+  deleted = false;
   onChange = (e) => {
     console.log("onChange", e.target.id);
     this.props.togleCecked(e.target.id);
@@ -19,6 +19,10 @@ class Task extends Component {
   };
 
   onDelete = () => {
+    console.log("this deleted on delete before", this.deleted);
+    this.deleted = true;
+    console.log("this deleted on delete after", this.deleted);
+    this.props.setingDeletedTrue(this.props.id);
     this.props.setingDeletedTrue(this.props.id);
     this.props.deleteTask(this.props.id);
     this.props.viewUnComplitedTasksCount();
@@ -50,7 +54,9 @@ class Task extends Component {
 
   componentWillUnmount() {
     console.log("componentWillUnmount in Task");
-    if (!this.props.deleted && this.props.id) {
+    if (!this.deleted && this.props.id) {
+      console.log("this deleted", this.deleted);
+
       console.log("componentWillUnmount in Task !this.props.deleted");
       this.props.setingTimeOfUnmount(this.props.id);
     }
@@ -97,7 +103,12 @@ class Task extends Component {
             <div className={classNamesDescription}>{this.props.title} </div>
             <div className="timersContainer">
               <TimeOnWork {...this.props} />
-              <div className="created"></div>
+              <div className="created">
+                <Timer
+                  deleted={this.props.deleted}
+                  creationDate={this.props.creationDate}
+                />
+              </div>
             </div>
 
             <button

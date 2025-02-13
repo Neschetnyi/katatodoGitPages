@@ -207,16 +207,20 @@ class TodoApp extends Component {
     },
 
     setingTimeOfUnmount: (id) => {
-      let time = Date.now();
-      this.setState(({ tasks }) => {
-        let tempArr = [...tasks];
-        let Index = tasks.findIndex((el) => el.id === id);
-        let before = tempArr.slice(0, Index);
-        let after = tempArr.slice(Index + 1);
-        let newTask = { ...tempArr[Index], timeOfUnmount: time };
-        let newArr = [...before, newTask, ...after];
-        return { tasks: newArr };
-      }, this.actions.saveToLocalStorage);
+      if (id) {
+        console.log("when setting time of umount id: ", id);
+
+        let time = Date.now();
+        this.setState(({ tasks }) => {
+          let tempArr = [...tasks];
+          let Index = tasks.findIndex((el) => el.id === id);
+          let before = tempArr.slice(0, Index);
+          let after = tempArr.slice(Index + 1);
+          let newTask = { ...tempArr[Index], timeOfUnmount: time };
+          let newArr = [...before, newTask, ...after];
+          return { tasks: newArr };
+        }, this.actions.saveToLocalStorage);
+      }
     },
 
     changingViewMode: (viewMode) => {
