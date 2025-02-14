@@ -3,6 +3,8 @@ import TasksFilter from "./TasksFilter/TasksFilter";
 
 class Footer extends Component {
   onClear = () => {
+    console.log("onClear", this.props.data.tasks);
+
     this.props.actions.clearComplitedTasks();
     this.props.actions.viewUnComplitedTasksCount();
   };
@@ -14,10 +16,7 @@ class Footer extends Component {
           {this.props.data.unComplitedTasks} items left
         </span>
         <TasksFilter actions={this.props.actions} />
-        <button
-          className="clear-completed"
-          onClick={this.props.actions.clearComplitedTasks}
-        >
+        <button className="clear-completed" onClick={this.onClear}>
           Clear completed
         </button>
       </footer>

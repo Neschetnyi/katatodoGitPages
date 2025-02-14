@@ -108,7 +108,11 @@ class TodoApp extends Component {
         let Index = tasks.findIndex((el) => el.id === id);
         let before = tempArr.slice(0, Index);
         let after = tempArr.slice(Index + 1);
-        let newTask = { ...tempArr[Index], checked: !tempArr[Index].checked };
+        let newTask = {
+          ...tempArr[Index],
+          checked: !tempArr[Index].checked,
+          deleted: !tempArr[Index].deleted,
+        };
         let newArr = [...before, newTask, ...after];
         return { tasks: newArr };
       }, this.actions.saveToLocalStorage);
@@ -286,7 +290,7 @@ class TodoApp extends Component {
   };
 
   componentDidMount() {
-    // localStorage.clear();
+    localStorage.clear();
     // Восстанавливаем состояние из localStorage при монтировании компонента
     this.actions.loadFromLocalStorage();
 

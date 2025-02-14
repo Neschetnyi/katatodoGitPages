@@ -54,7 +54,7 @@ class Task extends Component {
 
   componentWillUnmount() {
     console.log("componentWillUnmount in Task");
-    if (!this.deleted && this.props.id) {
+    if (!this.props.checked && !this.deleted && this.props.id) {
       console.log("this deleted", this.deleted);
 
       console.log("componentWillUnmount in Task !this.props.deleted");
