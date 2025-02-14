@@ -31,6 +31,7 @@ class TodoApp extends Component {
         additionalTime: 0,
         creationDate: time,
         deleted: false,
+        currentTime: 0,
       };
     },
 
@@ -79,6 +80,37 @@ class TodoApp extends Component {
           timeInSec: this.state.tasks[Index].timeInSec - 1,
         };
         let newArr = [...before, timeInSec, ...after];
+        return { tasks: newArr };
+      }, this.actions.saveToLocalStorage);
+    },
+
+    setTimeToNull: (id) => {
+      this.setState(({ tasks }) => {
+        let tempArr = [...tasks];
+        let Index = tasks.findIndex((el) => el.id === id);
+        let before = tempArr.slice(0, Index);
+        let after = tempArr.slice(Index + 1);
+        let newTask = {
+          ...tempArr[Index],
+          timeInSec: 0,
+        };
+        let newArr = [...before, newTask, ...after];
+        return { tasks: newArr };
+      }, this.actions.saveToLocalStorage);
+    },
+
+    setCurrentTime: (id) => {
+      this.setState(({ tasks }) => {
+        let time = Date.now();
+        let tempArr = [...tasks];
+        let Index = tasks.findIndex((el) => el.id === id);
+        let before = tempArr.slice(0, Index);
+        let after = tempArr.slice(Index + 1);
+        let newTask = {
+          ...tempArr[Index],
+          currentTime: time,
+        };
+        let newArr = [...before, newTask, ...after];
         return { tasks: newArr };
       }, this.actions.saveToLocalStorage);
     },

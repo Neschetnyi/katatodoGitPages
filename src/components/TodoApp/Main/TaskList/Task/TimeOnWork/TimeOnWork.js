@@ -14,9 +14,10 @@ class TimeOnWork extends Component {
     ) {
       console.log("lets play! TimeOnWork");
       console.log("this.timer", this.timer);
+
       this.timer = setInterval(() => {
         console.log("interval timer is set");
-
+        this.props.setCurrentTime(this.props.id);
         this.props.timeDecrementation(this.props.id);
       }, 1000);
 
@@ -35,7 +36,7 @@ class TimeOnWork extends Component {
   startTimer = () => {
     this.timer = setInterval(() => {
       console.log("interval timer is set");
-
+      this.props.setCurrentTime(this.props.id);
       this.props.timeDecrementation(this.props.id);
     }, 1000);
   };
@@ -47,11 +48,13 @@ class TimeOnWork extends Component {
     if (this.props.play) {
       console.log("componentDidMount this.props.play set interval");
       console.log("componentDidMount this.props.play is", this.props.play);
+
       this.timer = setInterval(() => {
         console.log("interval timer is set");
 
         this.props.timeDecrementation(this.props.id);
       }, 1000);
+
       console.log("componentDidMount this.props.play is", this.props.play);
     }
     this.props.clearingTimeOfUnmount(this.props.id);
@@ -59,11 +62,17 @@ class TimeOnWork extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     console.log("componentDidUpdate TimeOnWork");
+
     if (
       prevProps.timeInSec !== this.props.timeInSec ||
       (prevProps.play !== this.props.play && !this.props.paused)
     ) {
       console.log("lets Update");
+      if (this.props.timeInSec < 0) {
+        console.log("time sets to null");
+
+        this.props.setTimeToNull(this.props.id);
+      }
       if (this.props.timeInSec === 0) {
         console.log("lets Update this.props.timeInSec === 0 clear interval");
         clearInterval(this.timer);

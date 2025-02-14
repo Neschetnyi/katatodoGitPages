@@ -39,13 +39,26 @@ class Task extends Component {
   }
 
   componentDidMount() {
+    console.log("componentDidMount in Task timeInSec:", this.props.timeInSec);
+    console.log(
+      "componentDidMount in Task currentTime:",
+      this.props.currentTime
+    );
     console.log(
       "componentDidMount in Task time of Unmount: ",
       this.props.timeOfUnmount
     );
+    if (this.props.play && this.props.timeOfUnmount === 0) {
+      console.log("componentDidMount in Task timeOfUnmount === 0 !!!!!!!");
+      let newTime = Date.now();
+      let subTime =
+        this.props.timeInSec -
+        Math.trunc((newTime - this.props.currentTime) / 1000);
+      this.props.changingTimeState(this.props.id, subTime);
+    }
     if (this.props.play && this.props.timeOfUnmount !== 0) {
       console.log(
-        "componentDidMount in Task time of Unmount: !!!!!!!!!",
+        "componentDidMount in Task time of Unmount:",
         this.props.timeOfUnmount
       );
       let time = Date.now();
