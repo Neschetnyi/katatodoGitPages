@@ -10,7 +10,12 @@ class TodoApp extends Component {
     createTask: (props) => {
       let time = Date.now();
       console.log("createTask", time, "type of :", typeof time);
-
+      let newTime = this.actions.TimeToSecConversion({
+        min: props.min,
+        sec: props.sec,
+        hour: props.hour,
+        day: props.day,
+      });
       return {
         id: this.newId++,
         title: props.title,
@@ -18,12 +23,7 @@ class TodoApp extends Component {
         sec: props.sec,
         hour: props.hour,
         day: props.day,
-        timeInSec: this.actions.TimeToSecConversion({
-          min: props.min,
-          sec: props.sec,
-          hour: props.hour,
-          day: props.day,
-        }),
+        timeInSec: newTime,
         checked: false,
         paused: false,
         play: false,
@@ -177,6 +177,7 @@ class TodoApp extends Component {
 
     clearComplitedTasks: () => {
       this.setState(({ tasks }) => {
+        console.log("clearComplitedTasks", tasks);
         let newArr = tasks.filter((el) => el.checked === false);
         return { tasks: newArr };
       }, this.actions.saveToLocalStorage);
