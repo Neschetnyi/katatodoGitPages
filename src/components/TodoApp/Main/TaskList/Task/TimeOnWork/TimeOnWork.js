@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 class TimeOnWork extends Component {
   timer = null;
+
   onPlay = () => {
     console.log("onPlay TimeOnWork");
     console.log(" !this.props.play", !this.props.play);
@@ -29,6 +30,14 @@ class TimeOnWork extends Component {
     clearInterval(this.timer);
     this.timer = null;
     this.props.toglePlayFalse(this.props.id);
+  };
+
+  startTimer = () => {
+    this.timer = setInterval(() => {
+      console.log("interval timer is set");
+
+      this.props.timeDecrementation(this.props.id);
+    }, 1000);
   };
 
   componentDidMount() {
