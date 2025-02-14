@@ -43,7 +43,11 @@ class Task extends Component {
       "componentDidMount in Task time of Unmount: ",
       this.props.timeOfUnmount
     );
-    if (this.props.play) {
+    if (this.props.play && this.props.timeOfUnmount !== 0) {
+      console.log(
+        "componentDidMount in Task time of Unmount: !!!!!!!!!",
+        this.props.timeOfUnmount
+      );
       let time = Date.now();
       let addingTime =
         this.props.timeInSec -
@@ -89,7 +93,7 @@ class Task extends Component {
     if (this.state.edit) {
       classNames += "editing ";
     }
-    console.log("single task props", this.props);
+
     return (
       <li className={classNames}>
         <div className="view">

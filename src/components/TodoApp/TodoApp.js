@@ -181,7 +181,6 @@ class TodoApp extends Component {
 
     clearComplitedTasks: () => {
       this.setState(({ tasks }) => {
-        console.log("clearComplitedTasks", tasks);
         let newArr = tasks.filter((el) => el.checked === false);
         return { tasks: newArr };
       }, this.actions.saveToLocalStorage);
