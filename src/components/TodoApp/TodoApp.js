@@ -139,7 +139,7 @@ const TodoApp = () => {
     saveToLocalStorage();
   };
 
-  const clearCompletedTasks = () => {
+  const clearComplitedTasks = () => {
     setTasks((prevTasks) => prevTasks.filter((task) => !task.checked));
     saveToLocalStorage();
   };
@@ -228,7 +228,7 @@ const TodoApp = () => {
     toglePausedTrue,
     toglePausedFalse,
     changingTimeState,
-    clearCompletedTasks,
+    clearComplitedTasks,
     clearingTimeOfUnmount,
     setingDeletedTrue,
     setingTimeOfUnmount,

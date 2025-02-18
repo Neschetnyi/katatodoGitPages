@@ -1,153 +1,155 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import EditComponent from "./EditComponent/EditComponent";
 import Timer from "./Timer/Timer";
 import PropTypes from "prop-types";
 import TimeOnWork from "./TimeOnWork/TimeOnWork";
 import "./Task.css";
 
-class Task extends Component {
-  state = {
-    edit: false,
-  };
-  deleted = false;
-  onChange = (e) => {
-    console.log("onChange", e.target.id);
-    this.props.togleCecked(e.target.id);
-    this.props.viewUnComplitedTasksCount();
-    this.props.toglePlayFalse(this.props.id);
-    this.props.saveToLocalStorage();
-  };
+const Task = ({
+  id,
+  title,
+  checked,
+  play,
+  timeInSec,
+  currentTime,
+  timeOfUnmount,
+  creationDate,
+  deleted,
+  togleCecked,
+  viewUnComplitedTasksCount,
+  toglePlayFalse,
+  saveToLocalStorage,
+  setingDeletedTrue,
+  deleteTask,
+  changingTimeState,
+  setingTimeOfUnmount,
+  changingTitle,
+  secondsConverter,
+  clearingTimeOfUnmount,
+  toglePlayTrue,
+  setCurrentTime,
+  timeDecrementation,
+}) => {
+  const [edit, setEdit] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
 
-  onDelete = () => {
-    console.log("this deleted on delete before", this.deleted);
-    this.deleted = true;
-    console.log("this deleted on delete after", this.deleted);
-    this.props.setingDeletedTrue(this.props.id);
-    this.props.setingDeletedTrue(this.props.id);
-    this.props.deleteTask(this.props.id);
-    this.props.viewUnComplitedTasksCount();
-  };
+  useEffect(() => {
+    console.log("componentDidMount in Task timeInSec:", timeInSec);
+    console.log("componentDidMount in Task currentTime:", currentTime);
+    console.log("componentDidMount in Task time of Unmount:", timeOfUnmount);
 
-  togleEdit = () => {
-    this.setState({ edit: !this.state.edit });
-  };
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.timeInSec !== this.props.timeInSec) {
-      this.props.viewUnComplitedTasksCount();
-    }
-  }
-
-  componentDidMount() {
-    console.log("componentDidMount in Task timeInSec:", this.props.timeInSec);
-    console.log(
-      "componentDidMount in Task currentTime:",
-      this.props.currentTime
-    );
-    console.log(
-      "componentDidMount in Task time of Unmount: ",
-      this.props.timeOfUnmount
-    );
-    if (this.props.play && this.props.timeOfUnmount === 0) {
-      console.log("componentDidMount in Task timeOfUnmount === 0 !!!!!!!");
+    if (play) {
       let newTime = Date.now();
-      let subTime =
-        this.props.timeInSec -
-        Math.trunc((newTime - this.props.currentTime) / 1000);
-      this.props.changingTimeState(this.props.id, subTime);
-    }
-    if (this.props.play && this.props.timeOfUnmount !== 0) {
-      console.log(
-        "componentDidMount in Task time of Unmount:",
-        this.props.timeOfUnmount
-      );
-      let time = Date.now();
-      let addingTime =
-        this.props.timeInSec -
-        Math.trunc((time - this.props.timeOfUnmount) / 1000);
-      this.props.changingTimeState(this.props.id, addingTime);
-    }
-  }
+      let adjustedTime = timeInSec;
 
-  componentWillUnmount() {
-    console.log("componentWillUnmount in Task");
-    if (!this.props.checked && !this.deleted) {
-      console.log("this deleted", this.deleted);
+      if (timeOfUnmount === 0) {
+        adjustedTime -= Math.trunc((newTime - currentTime) / 1000);
+      } else {
+        adjustedTime -= Math.trunc((newTime - timeOfUnmount) / 1000);
+      }
 
-      console.log("componentWillUnmount in Task !this.props.deleted");
-      this.props.setingTimeOfUnmount(this.props.id);
+      changingTimeState(id, adjustedTime);
     }
-  }
+  }, []);
 
-  render() {
-    let editComponent = null;
-    if (this.state.edit) {
-      editComponent = (
-        <EditComponent
-          id={this.props.id}
-          togleEdit={this.togleEdit}
-          title={this.props.title}
-          changingTitle={this.props.changingTitle}
-          saveToLocalStorage={this.props.saveToLocalStorage}
+  useEffect(() => {
+    viewUnComplitedTasksCount();
+  }, [timeInSec]);
+
+  useEffect(() => {
+    return () => {
+      console.log("componentWillUnmount in Task");
+      if (!checked && !isDeleted) {
+        console.log("componentWillUnmount in Task !deleted");
+        setingTimeOfUnmount(id);
+      }
+    };
+  }, [checked, isDeleted]);
+
+  const handleToggleChecked = (e) => {
+    togleCecked(e.target.id);
+    viewUnComplitedTasksCount();
+    toglePlayFalse(id);
+    saveToLocalStorage();
+  };
+
+  const handleDelete = () => {
+    setIsDeleted(true);
+    setingDeletedTrue(id);
+    deleteTask(id);
+    viewUnComplitedTasksCount();
+  };
+
+  return (
+    <li className={edit ? "editing" : ""}>
+      <div className="view">
+        <input
+          className="toggle"
+          checked={checked}
+          type="checkbox"
+          onChange={handleToggleChecked}
         />
-      );
-    } else {
-      editComponent = null;
-    }
-
-    let { checked } = this.props;
-    let classNames = "";
-    let classNamesDescription = "description";
-
-    if (checked) {
-      classNamesDescription += " completed ";
-    }
-
-    if (this.state.edit) {
-      classNames += "editing ";
-    }
-
-    return (
-      <li className={classNames}>
-        <div className="view">
-          <input
-            className="toggle"
-            checked={checked}
-            type="checkbox"
-            onChange={this.onChange}
-          />
-          <label>
-            <div className={classNamesDescription}>{this.props.title} </div>
-            <div className="timersContainer">
-              <TimeOnWork {...this.props} />
-              <div className="created">
-                <Timer
-                  deleted={this.props.deleted}
-                  creationDate={this.props.creationDate}
-                />
-              </div>
+        <label>
+          <div className={`description ${checked ? "completed" : ""}`}>
+            {title}
+          </div>
+          <div className="timersContainer">
+            <TimeOnWork
+              id={id}
+              timeInSec={timeInSec}
+              play={play}
+              secondsConverter={secondsConverter}
+              clearingTimeOfUnmount={clearingTimeOfUnmount}
+              toglePlayTrue={toglePlayTrue}
+              setCurrentTime={setCurrentTime}
+              timeDecrementation={timeDecrementation}
+              toglePlayFalse={toglePlayFalse}
+              /* toglePausedTrue,
+  toglePausedFalse,*/
+            />
+            <div className="created">
+              <Timer deleted={deleted} creationDate={creationDate} />
             </div>
+          </div>
+          <button
+            className="icon icon-edit"
+            onClick={() => setEdit(!edit)}
+          ></button>
+          <button className="icon icon-destroy" onClick={handleDelete}></button>
+        </label>
+      </div>
+      {edit && (
+        <EditComponent
+          id={id}
+          togleEdit={() => setEdit(!edit)}
+          title={title}
+          changingTitle={changingTitle}
+          saveToLocalStorage={saveToLocalStorage}
+        />
+      )}
+    </li>
+  );
+};
 
-            <button
-              className="icon icon-edit"
-              onClick={this.togleEdit}
-            ></button>
-            <button
-              className="icon icon-destroy"
-              onClick={this.onDelete}
-            ></button>
-          </label>
-        </div>
-        {editComponent}
-      </li>
-    );
-  }
-}
+Task.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  checked: PropTypes.bool.isRequired,
+  play: PropTypes.bool.isRequired,
+  timeInSec: PropTypes.number.isRequired,
+  currentTime: PropTypes.number.isRequired,
+  timeOfUnmount: PropTypes.number.isRequired,
+  creationDate: PropTypes.number.isRequired,
+  deleted: PropTypes.bool.isRequired,
+  togleCecked: PropTypes.func.isRequired,
+  viewUnComplitedTasksCount: PropTypes.func.isRequired,
+  toglePlayFalse: PropTypes.func.isRequired,
+  saveToLocalStorage: PropTypes.func.isRequired,
+  setingDeletedTrue: PropTypes.func.isRequired,
+  deleteTask: PropTypes.func.isRequired,
+  changingTimeState: PropTypes.func.isRequired,
+  setingTimeOfUnmount: PropTypes.func.isRequired,
+  changingTitle: PropTypes.func.isRequired,
+};
 
 export default Task;
-
-/* <Timer
-deleted={this.props.deleted}
-creationDate={this.props.creationDate}
-/>
-*/
