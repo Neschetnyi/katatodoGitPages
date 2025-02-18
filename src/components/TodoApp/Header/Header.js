@@ -3,6 +3,8 @@ import NewTaskForm from "./NewTaskForm/NewTaskForm";
 import PropTypes from "prop-types";
 
 const Header = ({ actions }) => {
+  console.log(actions);
+
   return (
     <header className="header">
       <h1>Список Дел</h1>

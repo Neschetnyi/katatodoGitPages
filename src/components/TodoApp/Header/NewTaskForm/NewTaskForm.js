@@ -1,130 +1,117 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./NewTaskForm.css";
 
-class NewTaskForm extends Component {
-  state = {
-    title: "",
-    min: "",
-    sec: "",
-    hour: "",
-    day: "",
-  };
+const NewTaskForm = ({ actions }) => {
+  const [title, setTitle] = useState("");
+  const [day, setDay] = useState("");
+  const [hour, setHour] = useState("");
+  const [min, setMin] = useState("");
+  const [sec, setSec] = useState("");
 
-  onChange = (e) => {
-    if (
-      e.target.value !== "" &&
-      /^[+]?\d+$/.test(e.target.value) &&
-      (e.target.name === "day" ||
-        e.target.name === "hour" ||
-        e.target.name === "min" ||
-        e.target.name === "sec")
-    ) {
-      // Введенное значение является числом
-      this.setState({
-        [e.target.name]: e.target.value, // Позволяет обновлять любое поле
-      });
-    } else if (e.target.name === "title") {
-      this.setState({
-        [e.target.name]: e.target.value,
-      });
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "title") {
+      setTitle(value);
+    } else if (/^[+]?[0-9]*$/.test(value)) {
+      switch (name) {
+        case "day":
+          setDay(value);
+          break;
+        case "hour":
+          setHour(value);
+          break;
+        case "min":
+          setMin(value);
+          break;
+        case "sec":
+          setSec(value);
+          break;
+        default:
+          break;
+      }
     } else {
       alert("Введите число");
     }
   };
 
-  onSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    if (this.state.title === "") {
+    if (title.trim() === "") {
       alert("Введите задачу");
-    } else {
-      let tempOutput = {
-        title: this.state.title,
-        min: this.state.min,
-        sec: this.state.sec,
-        hour: this.state.hour,
-        day: this.state.day,
-      };
-
-      if (tempOutput.sec === "") {
-        tempOutput.sec = 0;
-      }
-      if (tempOutput.min === "") {
-        tempOutput.min = 0;
-      }
-      if (tempOutput.hour === "") {
-        tempOutput.hour = 0;
-      }
-      if (tempOutput.day === "") {
-        tempOutput.day = 0;
-      }
-
-      this.props.actions.addTask(tempOutput);
+      return;
     }
 
-    this.setState({
-      title: "",
-      min: "",
-      sec: "",
-      hour: "",
-      day: "", // Обнуляем и другие поля
-    });
-    this.props.actions.viewUnComplitedTasksCount();
+    const tempOutput = {
+      title,
+      day: day || 0,
+      hour: hour || 0,
+      min: min || 0,
+      sec: sec || 0,
+    };
+
+    actions.addTask(tempOutput);
+    actions.viewUnComplitedTasksCount();
+
+    // Очистка полей
+    setTitle("");
+    setDay("");
+    setHour("");
+    setMin("");
+    setSec("");
   };
 
-  handleKeyPress = (e) => {
+  const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      this.onSubmit(e);
+      onSubmit(e);
     }
   };
 
-  render() {
-    return (
-      <form onSubmit={this.onSubmit} className="new-todo-form">
-        <input
-          name="title"
-          className="new-todo"
-          placeholder="Что сделать?"
-          autoFocus
-          value={this.state.title}
-          onChange={this.onChange}
-          onKeyDown={this.handleKeyPress} // Обработка нажатия клавиши
-        />
-        <input
-          className="new-todo-form__timer"
-          name="day"
-          placeholder="Day"
-          value={this.state.day}
-          onChange={this.onChange}
-          onKeyDown={this.handleKeyPress} // Обработка нажатия клавиши
-        />
-        <input
-          className="new-todo-form__timer"
-          name="hour"
-          placeholder="Hour"
-          value={this.state.hour}
-          onChange={this.onChange}
-          onKeyDown={this.handleKeyPress} // Обработка нажатия клавиши
-        />
-        <input
-          className="new-todo-form__timer"
-          name="min"
-          placeholder="Min"
-          value={this.state.min}
-          onChange={this.onChange}
-          onKeyDown={this.handleKeyPress} // Обработка нажатия клавиши
-        />
-        <input
-          className="new-todo-form__timer"
-          name="sec"
-          placeholder="Sec"
-          value={this.state.sec}
-          onChange={this.onChange}
-          onKeyDown={this.handleKeyPress} // Обработка нажатия клавиши
-        />
-      </form>
-    );
-  }
-}
+  return (
+    <form onSubmit={onSubmit} className="new-todo-form">
+      <input
+        name="title"
+        className="new-todo"
+        placeholder="Что сделать?"
+        autoFocus
+        value={title}
+        onChange={onChange}
+        onKeyDown={handleKeyPress}
+      />
+      <input
+        className="new-todo-form__timer"
+        name="day"
+        placeholder="Day"
+        value={day}
+        onChange={onChange}
+        onKeyDown={handleKeyPress}
+      />
+      <input
+        className="new-todo-form__timer"
+        name="hour"
+        placeholder="Hour"
+        value={hour}
+        onChange={onChange}
+        onKeyDown={handleKeyPress}
+      />
+      <input
+        className="new-todo-form__timer"
+        name="min"
+        placeholder="Min"
+        value={min}
+        onChange={onChange}
+        onKeyDown={handleKeyPress}
+      />
+      <input
+        className="new-todo-form__timer"
+        name="sec"
+        placeholder="Sec"
+        value={sec}
+        onChange={onChange}
+        onKeyDown={handleKeyPress}
+      />
+    </form>
+  );
+};
 
 export default NewTaskForm;
