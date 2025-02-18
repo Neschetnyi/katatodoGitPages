@@ -1,115 +1,75 @@
-import React, { Component } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
-class TimeOnWork extends Component {
-  timer = null;
+const TimeOnWork = ({
+  id,
+  timeInSec,
+  play,
+  paused,
+  checked,
+  setCurrentTime,
+  timeDecrementation,
+  toglePlayTrue,
+  toglePlayFalse,
+  clearingTimeOfUnmount,
+  setTimeToNull,
+  secondsConverter,
+}) => {
+  const timerRef = useRef(null);
 
-  onPlay = () => {
-    console.log("onPlay TimeOnWork");
-    console.log(" !this.props.play", !this.props.play);
-    if (
-      this.props.timeInSec !== 0 &&
-      !this.props.checked &&
-      !this.props.paused &&
-      !this.props.play
-    ) {
-      console.log("lets play! TimeOnWork");
-      console.log("this.timer", this.timer);
-
-      this.timer = setInterval(() => {
-        console.log("interval timer is set");
-        this.props.setCurrentTime(this.props.id);
-        this.props.timeDecrementation(this.props.id);
-      }, 1000);
-
-      console.log("this.timer", this.timer);
-      this.props.toglePlayTrue(this.props.id);
-    }
-  };
-
-  onStop = () => {
-    console.log("onStop TimeOnWork");
-    clearInterval(this.timer);
-    this.timer = null;
-    this.props.toglePlayFalse(this.props.id);
-  };
-
-  startTimer = () => {
-    this.timer = setInterval(() => {
-      console.log("interval timer is set");
-      this.props.setCurrentTime(this.props.id);
-      this.props.timeDecrementation(this.props.id);
+  const startTimer = () => {
+    timerRef.current = setInterval(() => {
+      setCurrentTime(id);
+      timeDecrementation(id);
     }, 1000);
   };
 
-  componentDidMount() {
-    console.log("componentDidMount id: ", this.props.id);
+  const stopTimer = () => {
+    clearInterval(timerRef.current);
+    timerRef.current = null;
+  };
 
-    console.log("componentDidMount TimeOnWork");
-    if (this.props.play) {
-      console.log("componentDidMount this.props.play set interval");
-      console.log("componentDidMount this.props.play is", this.props.play);
-
-      this.timer = setInterval(() => {
-        console.log("interval timer is set");
-
-        this.props.timeDecrementation(this.props.id);
-      }, 1000);
-
-      console.log("componentDidMount this.props.play is", this.props.play);
+  useEffect(() => {
+    if (play) {
+      startTimer();
     }
-    this.props.clearingTimeOfUnmount(this.props.id);
-  }
+    clearingTimeOfUnmount(id);
+    return () => {
+      stopTimer();
+    };
+  }, []);
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log("componentDidUpdate TimeOnWork");
-
-    if (
-      prevProps.timeInSec !== this.props.timeInSec ||
-      (prevProps.play !== this.props.play && !this.props.paused)
-    ) {
-      console.log("lets Update");
-      if (this.props.timeInSec < 0) {
-        console.log("time sets to null");
-
-        this.props.setTimeToNull(this.props.id);
-      }
-      if (this.props.timeInSec === 0) {
-        console.log("lets Update this.props.timeInSec === 0 clear interval");
-        clearInterval(this.timer);
-        this.timer = null;
-      }
-      if (this.props.checked) {
-        console.log("lets Update this.props.checked clear interval");
-        clearInterval(this.timer);
-        this.timer = null;
-      }
+  useEffect(() => {
+    if (timeInSec < 0) {
+      setTimeToNull(id);
     }
-  }
+    if (timeInSec === 0 || checked) {
+      stopTimer();
+    }
+  }, [timeInSec, checked]);
 
-  componentWillUnmount() {
-    console.log("componentWillUnmount TimeOnWork");
-    clearInterval(this.timer);
-    this.timer = null;
-  }
+  const onPlay = () => {
+    if (timeInSec !== 0 && !checked && !paused && !play) {
+      startTimer();
+      toglePlayTrue(id);
+    }
+  };
 
-  render() {
-    let time = this.props.secondsConverter(this.props.timeInSec);
-    console.log("Props in timerOnWork", this.props.id, this.props.play);
+  const onStop = () => {
+    stopTimer();
+    toglePlayFalse(id);
+  };
 
-    return (
-      <div className="description">
-        <button class="icon icon-play" onClick={this.onPlay}></button>
-        <button class="icon icon-pause" onClick={this.onStop}></button>
-        <span class="timerNumbers">
-          {time.dayF}:{time.hourF}:{time.minF}:{time.SecF}
-        </span>
-      </div>
-    );
-  }
-}
+  let time = secondsConverter(timeInSec);
+
+  return (
+    <div className="description">
+      <button className="icon icon-play" onClick={onPlay}></button>
+      <button className="icon icon-pause" onClick={onStop}></button>
+      <span className="timerNumbers">
+        {time.dayF}:{time.hourF}:{time.minF}:{time.SecF}
+      </span>
+    </div>
+  );
+};
 
 export default TimeOnWork;
-/*
- 
-
-*/

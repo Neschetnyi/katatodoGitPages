@@ -1,38 +1,26 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import PropTypes from "prop-types";
 
-class Timer extends Component {
-  state = {
-    timeToNow: formatDistanceToNow(this.props.creationDate, {
-      includeSeconds: true,
-    }),
-  };
+const Timer = ({ creationDate, deleted }) => {
+  const [timeToNow, setTimeToNow] = useState(
+    formatDistanceToNow(creationDate, { includeSeconds: true })
+  );
 
-  componentDidMount() {
-    this.timer = setInterval(() => {
-      this.setState({
-        timeToNow: formatDistanceToNow(this.props.creationDate, {
-          includeSeconds: true,
-        }),
-      });
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeToNow(formatDistanceToNow(creationDate, { includeSeconds: true }));
     }, 1000);
-  }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.deleted !== this.props.deleted) {
-      clearInterval(this.timer);
+    if (deleted) {
+      clearInterval(timer);
     }
-  }
 
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  }
+    return () => clearInterval(timer);
+  }, [creationDate, deleted]);
 
-  render() {
-    return <span>{this.state.timeToNow}</span>;
-  }
-}
+  return <span>{timeToNow}</span>;
+};
 
 Timer.defaultProps = {
   includeSeconds: true,
