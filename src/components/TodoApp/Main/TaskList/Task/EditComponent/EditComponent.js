@@ -1,43 +1,38 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-class EditComponent extends Component {
-  state = {
-    title: this.props.title,
+const EditComponent = ({ id, title, changingTitle, togleEdit }) => {
+  const [inputValue, setInputValue] = useState(title);
+
+  const onChange = (e) => {
+    setInputValue(e.target.value);
   };
 
-  onChange = (e) => {
-    this.setState({ title: e.target.value });
-  };
-
-  onSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    this.props.changingTitle(this.props.id, this.state.title);
-    this.props.togleEdit();
+    changingTitle(id, inputValue);
+    togleEdit();
   };
 
-  componentDidMount() {
-    window.addEventListener("click", this.props.togleEdit, true);
-  }
+  useEffect(() => {
+    window.addEventListener("click", togleEdit, true);
+    return () => {
+      window.removeEventListener("click", togleEdit, true);
+    };
+  }, [togleEdit]);
 
-  componentWillUnmount() {
-    window.removeEventListener("click", this.props.togleEdit, true);
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          type="text"
-          value={this.state.title}
-          onChange={this.onChange}
-          className="edit"
-          autoFocus
-        />
-      </form>
-    );
-  }
-}
+  return (
+    <form onSubmit={onSubmit}>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={onChange}
+        className="edit"
+        autoFocus
+      />
+    </form>
+  );
+};
 
 EditComponent.defaultProps = {
   id: 0,
