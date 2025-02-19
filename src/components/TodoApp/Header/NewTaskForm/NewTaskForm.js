@@ -53,7 +53,6 @@ const NewTaskForm = ({ actions }) => {
     actions.addTask(tempOutput);
     actions.viewUnComplitedTasksCount();
 
-    // Очистка полей
     setTitle("");
     setDay("");
     setHour("");

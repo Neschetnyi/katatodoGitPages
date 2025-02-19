@@ -245,19 +245,22 @@ const TodoApp = () => {
   };
 
   useEffect(() => {
-    loadFromLocalStorage();
-    viewUnComplitedTasksCount();
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
+    if (!tasks.length) {
+      loadFromLocalStorage();
+    }
 
-  useEffect(() => {
+    setUnComplitedTasks(tasks.filter((task) => !task.checked).length);
+
     localStorage.setItem(
       "todoAppState",
       JSON.stringify({ tasks, unComplitedTasks, viewMode })
     );
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
   }, [tasks, unComplitedTasks, viewMode]);
 
   return (
