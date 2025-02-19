@@ -78,7 +78,20 @@ const TodoApp = () => {
   };
 
   const deleteTask = (id) => {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.filter((task) => task.id !== id);
+
+      if (updatedTasks.length === 0) {
+        localStorage.clear();
+      } else {
+        localStorage.setItem(
+          "todoAppState",
+          JSON.stringify({ tasks: updatedTasks, unComplitedTasks, viewMode })
+        );
+      }
+
+      return updatedTasks;
+    });
   };
 
   const addTask = (title) => {
@@ -245,23 +258,31 @@ const TodoApp = () => {
   };
 
   useEffect(() => {
-    if (!tasks.length) {
-      loadFromLocalStorage();
+    const savedState = localStorage.getItem("todoAppState");
+    if (savedState) {
+      const { tasks, viewMode } = JSON.parse(savedState);
+      setTasks(tasks);
+      setViewMode(viewMode);
+      setUnComplitedTasks(tasks.filter((task) => !task.checked).length);
+      newId.current = tasks.length ? tasks[tasks.length - 1].id + 1 : 0;
     }
+  }, []);
 
+  useEffect(() => {
     setUnComplitedTasks(tasks.filter((task) => !task.checked).length);
 
-    localStorage.setItem(
-      "todoAppState",
-      JSON.stringify({ tasks, unComplitedTasks, viewMode })
-    );
+    if (tasks.length) {
+      localStorage.setItem(
+        "todoAppState",
+        JSON.stringify({ tasks, unComplitedTasks, viewMode })
+      );
+    }
 
     window.addEventListener("beforeunload", handleBeforeUnload);
-
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, [tasks, unComplitedTasks, viewMode]);
+  }, [tasks, viewMode]);
 
   return (
     <section className="todoapp">
